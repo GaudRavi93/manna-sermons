@@ -116,6 +116,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841498643762:android:a4955c9c7d68c09e1d1b2b",
+        "android_client_info": {
+          "package_name": "com.mannasermons.mannav1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841498643762-4rq292qodae9v1ndhf9gj3mi8r8kp22o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYXGWiUAyNEJOv3GodmAaAluvDlKrHv-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841498643762-4rq292qodae9v1ndhf9gj3mi8r8kp22o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "841498643762-b0b79r8u164o3efivl47s9iu4ftmms3u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.antrimcreek.manna"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

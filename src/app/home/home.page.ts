@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { DataService } from '../shared/services/data.service';
 import { ISermon } from '../shared/models/sermon';
 import { IPastor } from '../shared/models/pastor';
-import { PushService } from '../shared/services/push.service';
+// import { PushService } from '../shared/services/push.service';
 import { zip } from 'rxjs';
 // import { ThisReceiver } from '@angular/compiler';
 
@@ -28,12 +28,12 @@ export class HomePage {
   constructor(
     private domSanitizer: DomSanitizer,
     private dataService: DataService,
-    private pushService: PushService,
+    // private pushService: PushService,
     private router: Router,
   ) {}
 
   ngOnInit() {
-    this.pushService.init();
+    // this.pushService.init();
   }
 
   ionViewDidEnter() {

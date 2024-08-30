@@ -86,6 +86,7 @@ export class AccountInfoPage implements OnInit {
 
     await popover.onDidDismiss().then( (r) => {
       if (r && r.data) {
+        this.isChangeUser();
         if (category === 0) {
           this.user.state = r.data.value;
           this.user.stateName = r.data.name;
@@ -158,6 +159,7 @@ export class AccountInfoPage implements OnInit {
 
   private fetchData() {
     this.userService.getUserData().subscribe(res => {
+      console.log('res: ', res);
       this.user = res;
       this.user.stateName = this.getStateName(this.user.state);
       this.user.church_stateName = this.getStateName(this.user.church_state);

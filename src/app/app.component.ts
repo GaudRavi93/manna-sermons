@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router, UrlSerializer } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 import { TransitionService } from './shared/services/transition.service';
 import { DarkService } from './shared/services/dark.service';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { PayService } from './shared/services/pay.service';
 import { EventService } from './shared/services/event.service';
 import { UserService } from './shared/services/user.service';
 import { filter } from 'rxjs/operators';
 import { IUser } from './shared/models/user';
+import { Location } from '@angular/common';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,11 @@ export class AppComponent {
     private pay: PayService,
     private pl: Platform,
     private router: Router,
-    private userService: UserService
+    private location: Location,
+    private userService: UserService,
+    private deeplinks: Deeplinks,
+    private zone: NgZone,
+    private navCtrl: NavController
   ) {
     // this.pay.init();
     
@@ -96,6 +102,13 @@ export class AppComponent {
 
   private initializeApp() {
     this.pl.ready().then(() => {
+      // Added hardware back button functionality
+      this.pl.backButton.subscribeWithPriority(0, () => {
+        if (!this.location.isCurrentPathEqualTo('/home')) {
+          this.location.back();
+        }
+      });
+
       // this.darkService.init();
 
       this.pay.init();
@@ -116,8 +129,36 @@ export class AppComponent {
         }, 1000);
       }
       // this.navEvents();
+
+      // deepLink for only native devices
+      if(this.pl.is('cordova')){
+        setTimeout(() => {
+          this.deeplinks.routeWithNavController(this.navCtrl, {
+            '/': 'SermonDetailPage'
+          }).subscribe(match => {
+            this.zone.run(() => {
+              const queryParams = this.getDepLinkQueryParams(match.$link.url);
+              const videoId = queryParams['videoId'];
+              this.router.navigate([`/sermon-detail/${videoId}`]);
+            });
+          }, nomatch => {
+            console.error('Got a deeplink that didn\'t match', nomatch);
+          });
+        }, 5000);
+      }
     });
   }
 
-
+  getDepLinkQueryParams(url: string) {
+    const params = {};
+    const parser = document.createElement('a');
+    parser.href = url;
+    const query = parser.search.substring(1);
+    const vars = query.split('&');
+    for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split('=');
+      params[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    return params;
+  }
 }

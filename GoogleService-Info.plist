@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>841498643762-b0b79r8u164o3efivl47s9iu4ftmms3u.apps.googleusercontent.com</string>
+	<string>841498643762-gg9p0ss0ndeapqc7l4m2cc6bn228qhrs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.841498643762-b0b79r8u164o3efivl47s9iu4ftmms3u</string>
+	<string>com.googleusercontent.apps.841498643762-gg9p0ss0ndeapqc7l4m2cc6bn228qhrs</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>841498643762-7htsbl4cs7mc8g75qerdbg7tef83ufa6.apps.googleusercontent.com</string>
+	<string>841498643762-06acmkd7eegd8d1si8q9qltrpvjoargg.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDKHQ13MsTl3gY1KMsclvWC844NCQ3hcOI</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.antrimcreek.manna</string>
+	<string>com.mannasermons.manna</string>
 	<key>PROJECT_ID</key>
 	<string>manna-328020</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:841498643762:ios:e76134a9d90e191f1d1b2b</string>
+	<string>1:841498643762:ios:188beed4527c85f71d1b2b</string>
 </dict>
 </plist>

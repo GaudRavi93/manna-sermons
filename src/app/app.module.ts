@@ -14,14 +14,16 @@ import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { TabsPageModule } from './shared/components/tabs/tabs.module';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { Facebook } from '@awesome-cordova-plugins/facebook/ngx';
+// import { Facebook } from '@awesome-cordova-plugins/facebook/ngx';
 import { SignInWithApple } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 
-import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+// import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AppLauncher } from '@ionic-native/app-launcher/ngx';
-import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+
+// import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,19 +39,20 @@ import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
     AppRoutingModule,
   ],
   providers: [
-    InAppPurchase2,
+    // InAppPurchase2,
     SocialSharing,
     NativePageTransitions,
-    FCM,
+    // FCM,
     InAppBrowser,
     AppLauncher,
     GooglePlus,
-    Facebook,
+    // Facebook,
+    Deeplinks,
     SignInWithApple,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

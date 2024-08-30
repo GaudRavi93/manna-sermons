@@ -8,7 +8,7 @@ import { MessageService } from '../shared/services/message.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
-import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebook/ngx';
+// import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebook/ngx';
 import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
 import { Platform, PopoverController } from '@ionic/angular';
 import { UserService } from '../shared/services/user.service';
@@ -34,7 +34,7 @@ export class WelcomePage implements OnInit {
     private userService: UserService,
     private messageService: MessageService,
     private googlePlus: GooglePlus,
-    private fb: Facebook,
+    // private fb: Facebook,
     private pay: PayService,
     private popoverController: PopoverController,
     private signInWithApple: SignInWithApple,
@@ -43,6 +43,7 @@ export class WelcomePage implements OnInit {
 
   ngOnInit() {
     this.init();
+    this.tryToLogin();
     if (this.pl.is('android')) {
       this.isAppleSignVisible = false;
     }
@@ -67,8 +68,12 @@ export class WelcomePage implements OnInit {
   }
 
   public signInWithGoogle(): void {
-    this.googlePlus.login({})
+    this.googlePlus.login({
+      webClientId: "841498643762-4rq292qodae9v1ndhf9gj3mi8r8kp22o.apps.googleusercontent.com"
+    })
       .then(result => {
+        localStorage.setItem('socialLoginResponse', JSON.stringify(result));
+        localStorage.setItem('provider', Provider.GOOGLE);
         // this.doSign(result.email, result.userId);
         this.doSocialLogin(result.accessToken, Provider.GOOGLE);
       })
@@ -77,16 +82,16 @@ export class WelcomePage implements OnInit {
       });
   }
 
-  public signInWithFB(): void {
-    this.fb.login(['public_profile', 'email'])
-      .then((res: FacebookLoginResponse) => {
-        const email = `${res.authResponse.userID}fb@fb.com`;
-        const pass = res.authResponse.userID;
-        // this.doSign(email, pass);
-        this.doSocialLogin(res.authResponse.accessToken, Provider.FACEBOOK);
-      })
-      .catch(e => console.log('Error logging into Facebook', e));
-  }
+  // public signInWithFB(): void {
+  //   this.fb.login(['public_profile', 'email'])
+  //     .then((res: FacebookLoginResponse) => {
+  //       const email = `${res.authResponse.userID}fb@fb.com`;
+  //       const pass = res.authResponse.userID;
+  //       // this.doSign(email, pass);
+  //       this.doSocialLogin(res.authResponse.accessToken, Provider.FACEBOOK);
+  //     })
+  //     .catch(e => console.log('Error logging into Facebook', e));
+  // }
 
   public signApple(): void {
     this.signInWithApple.signin({
@@ -96,6 +101,8 @@ export class WelcomePage implements OnInit {
       ]
     })
       .then((res: AppleSignInResponse) => {
+        localStorage.setItem('socialLoginResponse', JSON.stringify(res));
+        localStorage.setItem('provider', Provider.APPLE);
         // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
         // alert('Send token to apple for verification: ' + res.identityToken);
         this.doSocialLogin(res.identityToken, Provider.APPLE, res.user, '');
@@ -216,6 +223,19 @@ export class WelcomePage implements OnInit {
       password: '',
       password_confirmation: ''
     };
+  }
+
+  private tryToLogin() {
+    const res = JSON.parse(localStorage.getItem('socialLoginResponse'));
+    const provide = localStorage.getItem('provider');
+    if(res){
+      if(provide === Provider.APPLE){
+        const name = res.fullName.givenName + ' ' + res.fullName.familyName;
+        this.doSocialLogin(res.identityToken, Provider.APPLE, res.user, name);
+      }else{
+        this.doSocialLogin(res.accessToken, Provider.GOOGLE);
+      }
+    }
   }
 
 }

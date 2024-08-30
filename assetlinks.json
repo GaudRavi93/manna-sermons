@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.mannasermons.mannav1",
+            "sha256_cert_fingerprints": [
+                "97:90:62:D1:CF:77:97:D1:4A:32:16:CF:48:85:2A:BD:71:4C:59:0E:49:10:8B:C9:2A:32:F3:4E:C9:3C:E4:35"
+            ]
+        }
+    }
+]

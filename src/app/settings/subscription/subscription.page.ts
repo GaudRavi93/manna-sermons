@@ -3,7 +3,7 @@ import { PopoverController } from '@ionic/angular';
 import { ConfirmPopupComponent } from '../../shared/components/confirm-popup/confirm-popup.component';
 import { popupText } from '../../constants';
 import { PayService } from '../../shared/services/pay.service';
-import { IAPProduct } from '@awesome-cordova-plugins/in-app-purchase-2';
+// import { IAPProduct } from '@awesome-cordova-plugins/in-app-purchase-2';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { IAPProduct } from '@awesome-cordova-plugins/in-app-purchase-2';
 })
 export class SubscriptionPage implements OnInit {
   public d = Date.now();
-  public product: IAPProduct;
+  // public product: IAPProduct;
 
   constructor(
     public popoverController: PopoverController,
@@ -24,7 +24,7 @@ export class SubscriptionPage implements OnInit {
   }
 
   ionViewDidEnter() { 
-    this.product = this.pay.getProduct();
+    // this.product = this.pay.getProduct();
   }
 
   public async openConfirmation() {
