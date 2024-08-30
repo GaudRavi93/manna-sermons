@@ -1,0 +1,6 @@
+<div [id]="'player-'+counter"></div>
+<div *ngIf="showSkipTime" class="time-point-cont" (click)="skipIntro()">
+  <!--<ion-icon name="play-outline"></ion-icon>-->
+  <img [src]="'assets/icon/play.png'" alt="">
+  <span style="text-decoration: underline">Skip to sermon start time, {{startTime*1000 | date: "mm:ss"}}</span>
+</div>

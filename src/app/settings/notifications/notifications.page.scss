@@ -1,0 +1,38 @@
+.cont {
+  font-size: 14px;
+}
+
+p.with-toggle {
+  position: relative;
+  width: 70%;
+}
+
+ion-toggle {
+  position: absolute;
+  right: -30%;
+  top: -10px;
+}
+
+ion-list {
+  padding-top: 10px;
+}
+
+ion-list, ion-item {
+  background-color: var(--cont-regular-color);
+  --background: var(--cont-regular-color);
+}
+
+.item, .item-divider {
+  border-color: #ebe2d7;
+  width: calc(100% - 20px);
+}
+
+
+h3 {
+  color: var(--reg-tab-color);
+  margin: 20px 0 12px;
+}
+
+p {
+  margin: 12px 0 20px;
+}

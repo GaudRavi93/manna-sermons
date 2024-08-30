@@ -1,0 +1,19 @@
+<app-header [church]="church" [isLoad]="isLoad"></app-header>
+
+<ion-content>
+  <ng-container *ngIf="church && !isLoad">
+    <h3 header-text>Church Pastor(s)</h3>
+    <app-pastor
+      *ngFor="let p of pastors; let i = index"
+      [pastor]="p"
+      [isShowTopLine]="true"
+      [isShowBottomLine]="i >= pastors.length - 1"
+      [isChurchPastor]="true"
+      (showPastor)="showPastor($event)"
+    ></app-pastor>
+  </ng-container>
+
+  <div class="loader" *ngIf="isLoad">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>

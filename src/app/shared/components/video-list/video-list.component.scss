@@ -1,0 +1,68 @@
+ion-grid {
+  margin: 0 20px 0;
+  padding: 0;
+}
+
+ion-row {
+  display: flex;
+  // align-items: center;
+  // justify-content: center;
+  height: 100%;
+  position: relative;
+  padding: 20px 0;
+  border-bottom: solid 1px var(--badge-border);
+
+  .flex-cont {
+    display: flex;
+    align-content: flex-start;
+
+    & div {
+      display: inline-block;
+    }
+  }
+
+  ion-col {
+    padding: 0;
+  }
+
+  .info {
+    cursor: pointer;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  p {
+    margin: 10px 0 0;
+    font-size: 13px;
+  }
+
+  [name="trash-outline"] {
+    font-size: 24px;
+  }
+}
+
+.img-cont {
+  width: 106px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.info-cont {
+  width: calc(100% - 120px);
+  padding-left: 15px;
+  text-align: left;
+}
+
+.trash-cont {
+  width: 38px;
+  height: 38px;
+  margin-top: 10px;
+  padding: 8px;
+  border: solid 1px var(--badge-border);
+  background-color: #fff;
+  border-radius: 50%;
+}

@@ -1,0 +1,32 @@
+<ion-grid
+  *ngIf="!pastor.char"
+  class="pastor"
+  [ngClass]="{ p20: isPadding, btop: isShowTopLine, bbottom: isShowBottomLine && !pastor.char }"
+>
+  <ion-row>
+    <ion-col size="2" (click)="onShowPastor()">
+      <div *ngIf="pastor.photo_url" class="img-cont">
+        <img [src]="pastor.photo_url" alt="img">
+      </div>
+      <div *ngIf="!pastor.photo_url" class="yellow-circle">
+        <div class="img-cont-person">
+          <img src="assets/icon/person-y2.svg" alt="">
+        </div>
+      </div>
+    </ion-col>
+    <ion-col (click)="onShowPastor()">
+      <h3>{{pastor.family_name}} {{pastor.given_name}}</h3>
+      <p *ngIf="!isChurchPastor">{{pastor.city}}, {{pastor.state}}</p>
+      <p *ngIf="isChurchPastor">{{pastor.sermons}} Sermons - {{pastor.follows_count}} Followers</p>
+    </ion-col>
+    <div *ngIf="isChurchPastor" class="arrow-cont" (click)="onShowPastor()">
+      <!--<ion-icon name="chevron-forward-outline"></ion-icon>-->
+    </div>
+
+    <div *ngIf="isShowUnfollow" class="unfollow-btn" (click)="onUnfollow()">Unfollow</div>
+
+  </ion-row>
+</ion-grid>
+<div class="char" *ngIf="pastor.char">
+  {{pastor.char}}
+</div>

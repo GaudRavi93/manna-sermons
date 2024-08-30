@@ -1,0 +1,36 @@
+<app-header-main
+  title="Topics"
+  [showBack]="true"
+  [showSearch]="false"
+  placeholder="Search topics"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col center *ngFor="let t of topics" (click)="gotoTopicDetail(t.name)">
+        <div class="topic-item">
+          <img [src]="t.image_url" alt="">
+          <div class="grad"></div>
+          <div class="info">
+            <h3>{{t.name}}</h3>
+            <p>
+              {{t.sermon_count}} sermons
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-no-found *ngIf="topics && topics.length < 1"></app-no-found>
+
+  <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

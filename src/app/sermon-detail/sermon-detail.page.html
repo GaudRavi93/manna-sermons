@@ -1,0 +1,64 @@
+<app-header
+
+></app-header>
+
+<ion-content>
+  <app-video-player
+    *ngIf="sermon"
+    [showSkipTime]="true"
+    [refresh]="refresher"
+    [videoId]="sermon.video.video_key"
+    [startTime]="sermon.video.sermon_start_time"
+  ></app-video-player>
+
+  <div class="content-cont" *ngIf="sermon && pastor">
+    <ion-grid class="video-info">
+      <ion-row>
+        <ion-col size="2" (click)="showPastorDetail(pastor.id)">
+          <div class="img-cont">
+            <img [src]="pastor.photo_url || 'assets/icon/group.svg'" alt="img">
+          </div>
+        </ion-col>
+        <ion-col>
+          <h3 header-text>
+            {{sermon.video.title}}
+          </h3>
+          <p>
+            <span underline (click)="showPastorDetail(pastor.id)">{{pastor.family_name}} {{pastor.given_name}}</span>
+            • {{sermon.video.video_views_count}} views
+          </p>
+          <p>{{sermon.likes_count}} favorites</p>
+        </ion-col>
+      </ion-row>
+
+      <div class="social">
+        <div (click)="like()" [ngClass]="sermon.liked ? 'yellow' : ''" class="follow-btn-cont">
+          <img class="logo" src="assets/icon/heart.svg" alt="">
+          {{sermon.liked ? 'Remove from Favorites' : 'Add to Favorites'}}
+        </div>
+
+        <div (click)="share()" class="follow-btn-cont">
+          <img class="logo" src="assets/icon/share.svg" alt="">
+          Share Video
+        </div>
+      </div>
+    </ion-grid>
+
+    <p>{{sermon.description}}</p>
+
+    <app-topics
+      title="Sermon Topics"
+      [noBackground]="true"
+      [topics]="sermon.keyword_list"
+    ></app-topics>
+
+    <h3 header-text>Additional Information</h3>
+
+    <p class="add-info">
+      <span *ngFor="let i of sermon.text_reference_list">
+        • {{i}}<br>
+      </span>
+    </p>
+
+  </div>
+</ion-content>

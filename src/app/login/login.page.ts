@@ -1,0 +1,201 @@
+import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { IUserCreds } from '../shared/models/register';
+import { AuthService } from '../shared/services/auth.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { Router } from '@angular/router';
+import { MessageService } from '../shared/services/message.service';
+import { GlobalConstant, popupText, Provider } from '../constants';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+import { Facebook, FacebookLoginResponse } from '@awesome-cordova-plugins/facebook/ngx';
+import { SignInWithApple, AppleSignInResponse, AppleSignInErrorResponse, ASAuthorizationAppleIDRequest } from '@awesome-cordova-plugins/sign-in-with-apple/ngx';
+import { StorageService } from '../shared/services/storage.service';
+import { PushService } from '../shared/services/push.service';
+import { PayService } from '../shared/services/pay.service';
+import { UserService } from '../shared/services/user.service';
+import { Platform } from '@ionic/angular';
+import { IUser } from '../shared/models/user';
+// import { ConfirmPopupComponent } from '../shared/components/confirm-popup/confirm-popup.component';
+import { PurchasePopupComponent } from '../shared/components/purchase-popup/purchase-popup.component';
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+})
+export class LoginPage implements OnInit {
+  public userData: IUserCreds;
+  public isVisiblePass = false;
+  public isAppleSignVisible = true;
+  
+  constructor(
+    private authService: AuthService,
+    private messageService: MessageService,
+    private storage: StorageService,
+    private pushService: PushService,
+    private pay: PayService,
+    private googlePlus: GooglePlus,
+    private popoverController: PopoverController,
+    private fb: Facebook,
+    private userService: UserService,
+    private signInWithApple: SignInWithApple,
+    private router: Router,
+    private pl: Platform,
+  ) { }
+
+  ngOnInit() {
+    this.tryToLogin();
+    if (this.pl.is('android')) {
+      this.isAppleSignVisible = false;
+    }
+  }
+
+  public togglePassVisible() {
+    this.isVisiblePass = !this.isVisiblePass;
+  }
+
+  public gotoSignUp() {
+    this.router.navigate(['welcome']);
+  }
+
+  public gotoForgot() {
+    this.router.navigate(['forgot']);
+  }
+
+  public facebookLogin() {
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then((res: FacebookLoginResponse) => {
+        this.doSocialLogin(res.authResponse.accessToken, Provider.FACEBOOK);
+      })
+      .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+  public appleLogin() {
+    this.signInWithApple.signin({
+      requestedScopes: [
+        ASAuthorizationAppleIDRequest.ASAuthorizationScopeFullName,
+        ASAuthorizationAppleIDRequest.ASAuthorizationScopeEmail
+      ]
+    })
+      .then((res: AppleSignInResponse) => {
+        // https://developer.apple.com/documentation/signinwithapplerestapi/verifying_a_user
+        // alert('Send token to apple for verification: ' + res.identityToken);
+        const name = res.fullName.givenName + ' ' + res.fullName.familyName;
+        this.doSocialLogin(res.identityToken, Provider.APPLE, res.user, name);
+      })
+      .catch((error: AppleSignInErrorResponse) => {
+        // alert(error.code + ' ' + error.localizedDescription);
+        console.error(error);
+      });
+  }
+
+  public googleLogin() {
+    this.googlePlus.login({})
+      .then(result => {
+        this.doSocialLogin(result.accessToken, Provider.GOOGLE);
+      })
+      .catch(err => {
+        this.messageService.showAlert(`Error ${JSON.stringify(err)}`);
+      });
+  }
+
+  private doSocialLogin(token: string, provider: string, uid?: string, uname?: string) {
+    this.authService.socialLogin(token, provider, uid, uname).pipe(catchError(error => {
+      return of({ error })
+    })).subscribe(res => {
+      if (!(res as any).error) {
+        this.checkAndInitPush();
+        this.userService.getUserData().subscribe(userRes => {
+          const user: IUser = userRes;
+          if (user.zip == null || user.city == null || user.state == null ||
+            user.zip.trim() === '' || user.city.trim() === '' || user.state.trim() === ''){
+              this.router.navigate(['registration']);
+          }
+          else {
+            this.router.navigate(['home']);
+            if (this.pay.isOk()){
+              this.openConfirmation();
+            }
+          }          
+          // else if (this.pay.isOk()){
+          //   this.openConfirmation();
+          // }
+          // else{
+          //   // this.openConfirmation();
+          //   this.router.navigate(['home']);
+          // }
+        });
+      } else {
+        const msg = 'You have entered an invalid username or password'; // (res as any).error.error_description;
+        this.messageService.showAlert(msg);
+      }
+    });
+  }
+  public async openConfirmation(){
+    const popover = await this.popoverController.create({
+      component: PurchasePopupComponent,
+      cssClass: 'unsubscribe-welcome',
+      translucent: false
+    });
+    popover.present();
+    await popover.onDidDismiss().then((r) => {
+      console.log(r);
+    });
+  }
+  public login() {
+    if (!this.isValid()) {
+      return;
+    }
+
+    this.authService.login(this.userData).pipe(catchError(error => {
+      return of({ error })
+    })).subscribe(async res => {
+      if (!(res as any).error) {
+        await this.checkAndInitPush();
+        this.userService.getUserData().subscribe(userRes => {
+          const user: IUser = userRes;
+          if (user.zip == null || user.city == null || user.state == null ||
+            user.zip.trim() === '' || user.city.trim() === '' || user.state.trim() === ''){
+              this.router.navigate(['registration']);
+          } else {
+            this.router.navigate(['home']);
+            if (this.pay.isOk()){
+              this.openConfirmation();
+            }
+          }          
+          // else if (this.pay.isOk()){
+          //   this.openConfirmation();
+          // }
+          // else{
+          //   // this.openConfirmation();
+          //   this.router.navigate(['home']);
+          // }
+        });        
+        // await this.router.navigate(['home']);
+      } else {
+        const msg = 'You have entered an invalid username or password'; // (res as any).error.error_description;
+        await this.messageService.showAlert(msg);
+      }
+
+      this.userData.email = '';
+      this.userData.password = '';
+    });
+  }
+
+  private async checkAndInitPush() {
+    const token = this.storage.get(GlobalConstant.PUSH_TOKEN);
+    if (token) {
+      this.pushService.registerDevice(token);
+      await this.pushService.requestPushPermision();
+    }
+  }
+
+  public isValid() {
+    return this.userData.email && this.userData.password;
+  }
+
+  private tryToLogin() {
+    this.userData = this.authService.getUserCreds();
+    this.login();
+  }
+}

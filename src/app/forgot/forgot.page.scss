@@ -1,0 +1,17 @@
+ion-content {
+  --padding-start: 48px;
+  --padding-end: 48px;
+  --background: url(../../assets/img/background.png) 0 0/100% 100% no-repeat;
+  --color: var(--reg-color);
+
+  .forgot-btn {
+    margin-top: 20px;
+  }
+
+  .sign {
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

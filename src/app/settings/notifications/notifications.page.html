@@ -1,0 +1,42 @@
+<app-header
+  title="Notifications"
+></app-header>
+
+<ion-content>
+  <ion-list *ngIf="user">
+    <ion-item>
+      <div class="cont">
+        <h3 header-text>Push Notifications</h3>
+        <p>Receive notifications when additional sermons from Pastors Your Follow or new features of the Manna App come available.</p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="cont">
+        <h3 header-text>Pastors You Follow</h3>
+        <p class="with-toggle">
+          Receive notifications when a Pastor you follow has a new video posted.
+          <ion-toggle
+            [(ngModel)]="user.pastor_notifications"
+            (ngModelChange)="updateAcc()"
+            color="success" mode="ios"
+          ></ion-toggle>
+        </p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <div class="cont">
+        <h3 header-text>Manna App</h3>
+        <p class="with-toggle">
+          Receive notifications when new features have been added to the app.
+          <ion-toggle
+            [(ngModel)]="user.manna_notifications"
+            (ngModelChange)="updateAcc()"
+            color="success" mode="ios"
+          ></ion-toggle>
+        </p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

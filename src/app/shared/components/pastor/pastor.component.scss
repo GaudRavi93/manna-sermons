@@ -1,0 +1,101 @@
+.btop {
+  border-top: 1px solid var(--badge-border);
+}
+
+.bbottom {
+  border-bottom: 1px solid var(--badge-border);
+}
+
+.pastor {
+  margin: 0;
+  padding: 15px 0;
+  position: relative;
+
+  & ion-col, & ion-row {
+    padding: 0;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 13px;
+  }
+
+  .unfollow-btn {
+    position: absolute;
+    right: 10px;
+    color: var(--active-badge-color);
+    height: 38px;
+    font-family: OpenSans-Bold;
+    font-size: 13px;
+    padding: 9px 13px;
+    border-radius: 19px;
+    border: solid 1px var(--badge-border);
+    background-color: var(--ion-color-white);
+    cursor: pointer;
+  }
+
+  ion-button {
+    font-size: 13px;
+    height: 31px;
+  }
+
+  .img-cont {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #fff;
+
+    & img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .yellow-circle {
+    width: 42px;
+    height: 42px;
+    border: solid 2px var(--yellow);
+
+    .img-cont-person {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: solid 1px var(--badge-border);
+      background-color: #fff;
+
+      & img {
+        width: 14px;
+        height: 14px;
+        margin: 11px;
+      }
+    }
+  }
+
+  p, h3 {
+    margin: 0;
+    text-align: left;
+  }
+}
+
+.char {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding-left: 20px;
+  color: var(--active-badge-color);
+  font-size: 14px;
+  font-weight: bold;
+  background-color: var(--reg-tab-bg);
+}
+
+.p20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}

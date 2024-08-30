@@ -1,0 +1,23 @@
+<div *ngIf="sermon && sermon.video" (click)="openSermonDetail()">
+  <div class="img-cont">
+    <img [src]="sermon.video.thumbnail_url">
+  </div>
+
+  <ion-grid class="video-info">
+    <ion-row>
+      <ion-col size="2" *ngIf="showPastorImg" class="yellow-circle">
+        <div class="img-cont">
+          <img [src]="sermon.video.pastor_photo_url || 'assets/icon/group.svg'" alt="img">
+        </div>
+      </ion-col>
+      <ion-col>
+        <h3 header-text>
+          {{sermon.video.title}}
+        </h3>
+        <p>
+          {{sermon.video.author}} • {{sermon.video.video_views_count}} views
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

@@ -1,0 +1,36 @@
+<app-header-main
+  [title]="topicName"
+  [showBack]="true"
+  placeholder="Search keywords, topics"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content>
+  <app-topics
+    *ngIf="options && options.length"
+    [topics]="options"
+    [isShowAll]="true"
+    [allowActive]="true"
+    [clearActive]="clearActive"
+    (setActive)="filterByTopic($event)"
+  ></app-topics>
+
+  <div *ngIf="isShowNoFound" nf-wrapper>
+    <app-no-found></app-no-found>
+  </div>
+
+  <app-video-list
+    *ngIf="sermons"
+    [sermons]= "sermons"
+    (onClickVideo)="gotoSermonDetail($event)"
+    (onClickPreview)="gotoSermonDetail($event)"
+  ></app-video-list>
+
+  <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

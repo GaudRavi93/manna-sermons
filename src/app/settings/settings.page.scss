@@ -1,0 +1,23 @@
+ion-list {
+  padding-top: 10px;
+}
+
+ion-item {
+  cursor: pointer;
+  font-size: 14px;
+
+  ion-icon {
+    font-size: 14px;
+    position: absolute;
+    right: 0;
+  }
+}
+
+.item, .item-divider {
+  border-color: #ebe2d7;
+  width: calc(100% - 20px);
+}
+
+.p20 {
+  padding: 20px 0;
+}

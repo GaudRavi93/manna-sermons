@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="logo">
+    <img src="../../assets/img/manna.svg" alt="">
+  </div>
+
+  <h2 center>{{isSuccessfulSent ? 'Password Reset' : 'Forgot Your Password?' }}</h2>
+  <p class="lato">
+    {{isSuccessfulSent ? 
+      'An email has been sent to the email address you entered. Please click the link in the email when you receive it.' :
+      'Please enter your email address.  A temporary password will be sent if this email address is on file.'
+    }}
+  </p>
+  
+  <ion-input *ngIf="!isSuccessfulSent" [(ngModel)]="email"
+             placeholder="Email"
+             type="email"
+  >
+  </ion-input>
+
+  <ion-button class="forgot-btn" [disabled]="!email" (click)="isSuccessfulSent ? gotoLogin() : sendEmail()" color="btn-bg" expand="block">{{isSuccessfulSent ? 'Back to Log In Screen' : 'Submit' }}</ion-button>
+
+  <div *ngIf="!isSuccessfulSent" class="sign" (click)="gotoSignIn()">
+    Create an Account
+  </div>
+  <div *ngIf="!isSuccessfulSent" class="sign" (click)="gotoLogin()">
+    Login
+  </div>
+  <h2 *ngIf="isSuccessfulSent" center>Still need help?</h2>
+  <div *ngIf="isSuccessfulSent" class="sign" (click)="openURL()">
+    Visit our Help Center
+  </div>
+</ion-content>

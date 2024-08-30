@@ -1,0 +1,43 @@
+<app-header-main
+  *ngIf="isFollowingPastors || !!search"
+  title="Pastors You Follow"
+  placeholder="Search pastors"
+  [clearText]="clearText"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content>
+  <ng-container *ngIf="!isFollowingPastors && !isLoad && !search">
+    <img class="logo" src="assets/icon/following.svg" alt="">
+    <h3>Pastors You Follow</h3>
+    <p class="desc">Receive notifications as new sermons become available for the Pastors You Follow.</p>
+
+    <ion-button class="exploring-btn" (click)="gotoPastors()" color="header-color" expand="block">Start Exploring Pastors</ion-button>
+  </ng-container>
+
+  <div *ngIf="!isFollowingPastors && !isLoad && !!search" nf-wrapper>
+    <app-no-found></app-no-found>
+  </div>
+
+  <ng-container *ngIf="isFollowingPastors && !isLoad">
+    <div class="pastors-cont">
+      <app-pastor
+        *ngFor="let p of filteredList; let i = index"
+        [pastor]="p"
+        (showPastor)="gotoPastor($event)"
+        [isShowUnfollow]="true"
+        [isShowBottomLine]="filteredList.length - 1 > i"
+        (unfollow)="unfollow($event)"
+      ></app-pastor>
+    </div>
+  </ng-container>
+
+  <div class="btn-cont-more" *ngIf="!isLoad && isFollowingPastors">
+    <ion-button (click)="gotoPastors()" color="header-color" expand="block">Find More Pastors to Follow</ion-button>
+  </div>
+
+  <div class="loader" *ngIf="isLoad">
+    <ion-spinner></ion-spinner>
+  </div>
+
+</ion-content>

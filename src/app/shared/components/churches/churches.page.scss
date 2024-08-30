@@ -1,0 +1,37 @@
+.item {
+  margin: 10px 20px 0;
+  padding-bottom: 14px;
+  // border-bottom: 1px solid #ebe2d7;
+  cursor: pointer;
+
+  h5 {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.item-no-last {
+  border-bottom: 1px solid #ebe2d7;
+}
+
+.char {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding-left: 20px;
+  color: var(--active-badge-color);
+  font-size: 14px;
+  font-weight: bold;
+  background-color: var(--reg-tab-bg);
+}
+
+.indexChars {
+  position: fixed;
+  top: 200px;
+  right: 20px;
+  height: auto;
+}

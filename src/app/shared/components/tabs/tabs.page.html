@@ -1,0 +1,14 @@
+<ion-tabs>
+  <!-- <ng-container *ngIf="showTabs"> -->
+  <ng-container *ngIf="showTabs">    
+    <ion-tab-bar slot="bottom" (click)="hidePadding()">
+
+      <ion-tab-button *ngFor="let i of menuList" [tab]="i.route" [ngClass]="isActive(i) ? '' : 'no-active'" (click)="setActive($event, i)">
+        <img class="img-ico" [src]="assets + i.ico + '.svg'" width="21" height="21" />
+        <!--<img class="img-ico" [src]="isActive(i) ? assets + i.ico + '.svg' : assets + i.ico + '-un.svg'" width="24" height="24" />-->
+
+        <ion-label>{{i.title}}</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ng-container>
+</ion-tabs>

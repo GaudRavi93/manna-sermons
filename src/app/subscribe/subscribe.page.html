@@ -1,0 +1,31 @@
+<app-header
+  title="Subscribe"
+  backPath="welcome"
+></app-header>
+
+<ion-content>
+  <div class="subscription-cont">
+    <div class="logo">
+      <img src="../../assets/icon/s-logo.svg" alt="">
+    </div>
+    <h3 center>
+      $2.99/month
+    </h3>
+    <p class="sub-info">
+      The Manna app curates sermons to feed your soul.  Featuring over 1,500 sermons and over 150 pastors, you can search by topic or pastor’s name, save your favorite sermons, and follow pastors you enjoy.  The hope is for you to grow in your Christian journey and nourish your soul.
+      <br><br>
+      If you select a church home/affiliation within the app, that organization will receive up to 20% of the subscription as a donation!
+    </p>
+
+    <ion-button (click)="makePay()" color="btn-bg" expand="block">Subscribe Now</ion-button>
+
+    <div class="help">
+      Need Help?
+    </div>
+
+    <div class="extra-link">
+      <span (click)="openURL(eulaURL)">Terms of Service</span> and
+      <span (click)="openURL(privacyPolicyURL)">Privacy Policy</span>
+    </div>
+  </div>
+</ion-content>

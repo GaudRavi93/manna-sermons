@@ -1,0 +1,28 @@
+h3 {
+  margin: 25px auto 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--active-badge-color);
+}
+
+p {
+  margin: 0 0 25px;
+  font-size: 14px;
+}
+
+.line {
+  width: 100%;
+  border-bottom: 1px solid var(--badge-border);
+}
+
+h4, p.info {
+  font-size: 14px;
+  line-height: 1.64;
+  text-align: left;
+}
+
+h4 {
+  font-weight: bold;
+}
+
+.info {}

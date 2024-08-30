@@ -1,0 +1,7 @@
+<div class="social-cont">
+  <ng-container *ngFor="let i of socialList">
+    <div *ngIf="i.handle" class="social-item" (click)="openSocial(i)">
+      <img [src]="'assets/icon/' + i.ico" alt="">
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,37 @@
+<app-header
+  title="Subscription Information"
+></app-header>
+
+<ion-content *ngIf="product">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col left>
+        ProductID
+      </ion-col>
+      <ion-col right>
+        {{product.title}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col left>
+        Renewal Date
+      </ion-col>
+      <ion-col right>
+        {{product.introPricePaymentMode}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <h3 header-text>Manage Subscription</h3>
+  <p>
+    The Manna subscription is {{product.price}}/month.  If you selected a church home/affiliation, 20% of your subscription is donated to your church home/affiliation.
+    <br>
+    <br>
+    <span (click)="openConfirmation()">Click here to Cancel Subscription</span>
+  </p>
+
+</ion-content>

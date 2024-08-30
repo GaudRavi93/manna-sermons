@@ -1,0 +1,9 @@
+diff a/src/app/shared/services/data.service.ts b/src/app/shared/services/data.service.ts	(rejected hunks)
+@@ -1,6 +1,7 @@
+ import { Injectable } from '@angular/core';
+ import { HttpClient } from '@angular/common/http';
+ import { Observable } from 'rxjs';
++import { first, timeout } from 'rxjs/operators';
+ import { environment } from '../../../environments/environment';
+ import { IChurch, IChurchPastorResponse, IChurchResponse } from '../models/church';
+ import { IPastor, IPastorResponse } from '../models/pastor';

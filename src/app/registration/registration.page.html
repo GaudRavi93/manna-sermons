@@ -1,0 +1,147 @@
+<app-header [title]="'Registration Form'"></app-header>
+
+<ion-content>
+  
+  <ion-grid tab-cont>
+    <ion-row>
+      <ion-col [ngClass]="currentTab === 0 ? '': 'un-active-tab'" (click)="changeTab(0)" tab>
+        Account Information
+      </ion-col>
+      <!-- <ion-col [ngClass]="currentTab === 1 ? '': 'un-active-tab'" (click)="changeTab(1)" tab>
+        Subscription Information
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+
+  <ng-container *ngIf="currentTab === 0">
+
+    <form [formGroup]="regForm" (ngSubmit)="register($event)" in-field>
+      <ion-input formControlName="given_name"
+                 placeholder="First Name"
+                 type="text"
+                 autocapitalize="words"
+      >
+      </ion-input>
+      <ion-input formControlName="family_name"
+                 placeholder="Last Name"
+                 type="text"   
+                 autocapitalize="words"
+      >
+      </ion-input>
+
+      <ion-input formControlName="city"
+                 placeholder="City"
+                 type="text"
+                 autocapitalize="words"
+      >
+      </ion-input>
+
+      <ion-grid st-zip>
+        <ion-row>
+          <ion-col>
+            <ion-input formControlName="state_name"
+                       placeholder="State"
+                       type="text"
+                       (click)="openPicker(0)"
+                       readonly
+            >
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-input formControlName="zip"
+                       placeholder="Zip Code"
+                       type="tel"
+                       maxlength="6"
+            >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <div class="or-cont">
+        <span class="line"></span>
+        <div>Optional Information</div>
+        <span class="line"></span>
+      </div>
+
+      <ion-grid st-zip>
+        <ion-row>
+          <ion-col>
+            <ion-input formControlName="age_name"
+                       placeholder="Age"
+                       type="text"
+                       (click)="openPicker(1)"
+                       readonly
+            >
+            <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-input>
+          </ion-col>
+          <ion-col>
+
+            <ion-input formControlName="gender_name"
+                       placeholder="Gender"
+                       type="text"
+                       (click)="openPicker(2)"
+                       readonly
+            >
+            <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      
+      <ion-input formControlName="church_name"
+                 placeholder="Church Home/Affiliation"
+                 type="text"
+                 autocapitalize="words"
+                 (ionChange)="isEmpty()"
+      >
+      </ion-input>
+      <ion-input formControlName="pastor_name"
+                 placeholder="Pastor Name"
+                 type="text"    
+                 autocapitalize="words"
+                 [readonly]="isChurchEmpty"
+      >
+      </ion-input>
+      <ion-input  formControlName="church_city"
+                  placeholder="City"
+                  type="text"
+                  [readonly]="isChurchEmpty"
+                  autocapitalize="words"
+      >
+      </ion-input>
+      <ion-input formControlName="church_state"
+                  placeholder="State"
+                  type="text"
+                  (click)="isChurchEmpty ? '' : openPicker(3)"
+                  readonly
+      >
+      <ion-icon name="chevron-down-outline"></ion-icon>
+      </ion-input>
+      <ion-button color="btn-bg" expand="block" type="submit" [ngClass]="isValid() ? '' : 'hide'">Save and Continue</ion-button>
+    </form>
+  </ng-container>
+
+  <!-- <div class="subscription-cont" *ngIf="currentTab === 1">
+    <div class="logo">
+      <img src="../../assets/icon/s-logo.svg" alt="">
+    </div>
+    <h3 center>
+      $2.99/month
+    </h3>
+    <p class="sub-info">
+      The Manna app curates sermons to feed your soul.  Featuring over 1,000 sermons and over 100 pastors, you can search by topic or pastor’s name, save your favorite sermons, and follow pastors you enjoy.  The hope is for you to grow in your Christian journey and nourish your soul.
+      <br><br>
+      If you select a church home/affiliation within the app, that organization will receive 20% of the subscription as a donation!
+    </p>
+
+    <ion-button (click)="makePay()" color="btn-bg" expand="block">Subscribe Now</ion-button>
+
+    <div class="help">
+      Need Help?
+    </div>
+  </div> -->
+</ion-content>

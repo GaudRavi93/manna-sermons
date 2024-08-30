@@ -1,0 +1,108 @@
+ion-content {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  --background: linear-gradient(to bottom, #fffefb, #fffcf5);
+  color: var(--ion-color-mid-grey);
+  overflow-y: scroll !important;
+  [tab-cont] {
+    background: var(--reg-tab-bg);
+  }
+
+  [tab] {
+    text-align: center;
+    padding: 24px 0;
+    cursor: pointer;
+    color: var(--reg-tab-color);
+  }
+
+  .un-active-tab {
+    opacity: 30%;
+  }
+
+  ion-button.hide {
+    opacity: 0.5;
+  }
+
+  form {
+    margin: 0 20px;
+  }
+
+  [st-zip] {
+    padding: 0;
+
+    & ion-col {
+      padding: 0;
+    }
+
+    & ion-col:first-of-type {
+      position: relative;
+      margin-right: 20px;
+
+      & ion-icon {
+        position: absolute;
+        right: 10px;
+        width: 15px;
+      }
+    }
+  }
+
+  .or-cont {
+    margin: 34px auto 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+     
+    .line {
+      width: 146px;
+      border-bottom: 1px solid #ebe2d7;
+      margin: 0 10px;
+      color: #6c1931;
+    }
+    div {
+      color: #6c1931;
+      font-weight: bold;
+    }
+  }
+
+
+
+  [type="submit"] {
+    margin-top: 20px;
+    margin-bottom: 120px;
+  }
+
+  .subscription-cont {
+    padding: 0 20px;
+  }
+
+  .logo {
+    margin: 20px auto;
+    width: 156px;
+    height: 156px;
+  }
+
+  .sub-info {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    color: var(--ion-color-mid-grey);
+  }
+
+  .help {
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+}
+

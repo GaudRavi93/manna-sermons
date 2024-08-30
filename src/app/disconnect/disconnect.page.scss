@@ -1,0 +1,18 @@
+ion-content {
+  background-color: var(--cont-regular-color);
+  --background: var(--cont-regular-color);
+}
+
+ion-grid{
+  height: 100%;
+}
+ion-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+ion-button {
+  min-width: 100px;
+}

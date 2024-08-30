@@ -1,0 +1,36 @@
+<app-header-main
+  title="Sermons"
+  placeholder="Search keywords"
+  [showBack]="true"
+  [icoUrl]="pastor? pastor.photo_url : null"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content>
+  <app-topics
+    *ngIf="topics && topics.length"
+    [topics]="topics"
+    [isShowAll]="true"
+    [allowActive]="true"
+    (setActive)="filterByTopic($event)"
+  ></app-topics>
+
+  <app-video-list
+    [sermons]="sermons"
+    (onClick)="gotoSermonDetails($event)"
+    (onClickVideo)="gotoSermonDetails($event)"
+    (onClickPreview)="gotoSermonDetails($event)"
+  ></app-video-list>
+
+  <div class="nf-cont">
+    <app-no-found *ngIf="isShowNoFound"></app-no-found>
+  </div>
+
+  <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

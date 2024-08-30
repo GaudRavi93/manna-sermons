@@ -1,0 +1,19 @@
+.time-point-cont {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--play-bg);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ion-color-mid-grey);
+
+  img {
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+  }
+
+  ion-icon[name="play-outline"] {
+    width: 12px;
+    height: 12px;
+  }
+}

@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar *ngIf="!isLoad">
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <div class="click-area" (click)="goBack()"></div>
+    </ion-buttons>
+
+    <ion-title center>
+      <div class="cont">
+        {{title}}
+        <div class="save" *ngIf="showSave" (click)="onClickSave()" [ngClass]="isSaveActive ? 's-active' : ''">
+          Save
+        </div>
+      </div>
+    </ion-title>
+
+    <div *ngIf="church" class="ch-info">
+      <div class="h-name">{{church.name}}</div>
+      {{church.city}}, {{church.state}}<br>
+      <!--<a [href]="church.website_url">{{church.website_url}}</a>-->
+      <a [href]="'#'" (click)="openExternalBrowser(church.website_url)">
+        {{church.website_url}}</a>
+    </div>
+
+    <div *ngIf="pastor" class="p-info">
+      <div class="yellow-circle">
+        <div class="img-cont">
+          <img [src]="pastor.photo_url || 'assets/icon/group.svg'" alt="img">
+        </div>
+      </div>
+      <!--<div class="img-cont">
+        <img [src]="pastor.photo_url || 'assets/icon/group.svg'" alt="img">
+      </div>-->
+      <div class="h-name">{{pastor.given_name}} {{pastor.family_name}}</div>
+      <p>{{pastor.city}}, {{pastor.state}}</p>
+      <p>{{pastor.sermons}} Sermons. {{pastor.follows_count}} Followers</p>
+      <p class="ch-name" (click)="onClickShowChurch(pastor.church_id)">
+        {{pastor.churchName}}
+      </p>
+
+    </div>
+
+  </ion-toolbar>
+
+  <div *ngIf="church && socialIsPresent()" class="social-cont">
+    <app-social [church]="church"></app-social>
+  </div>
+</ion-header>

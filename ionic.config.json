@@ -1,0 +1,13 @@
+{
+  "name": "manna-mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/url",
+      "proxyUrl": "https://manna-ac.herokuapp.com/"
+    }
+  ]
+}

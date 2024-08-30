@@ -1,0 +1,26 @@
+.social-cont {
+  padding-top: 10px;
+
+  .social-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--ion-color-white);
+    border-radius: 50%;
+    border: 1px solid var(--badge-border);
+    width: 38px;
+    height: 38px;
+    margin: 0 5px;
+    font-size: 16px;
+    cursor: pointer;
+
+    & img {
+      height: 14px;
+    }
+  }
+
+  .social-item:first-of-type img{
+    height: 18px;
+  }
+}

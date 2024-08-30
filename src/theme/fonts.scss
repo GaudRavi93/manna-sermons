@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans-Bold';
+  font-style: normal;
+  font-weight: bold;
+  src: url('../assets/fonts/OpenSans-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSans-Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/OpenSans-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Lato-Regular.ttf');//mine
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../assets/fonts/Oswald-Regular.ttf');//mine
+}
+
+
+* {
+  font-family: 'OpenSans';
+}
+
+font-face {
+  font-family: 'OpenSans', sans-serif;
+}
+
+font-face {
+  font-family: 'OpenSans-Bold', sans-serif;
+}
+
+:root {
+  --ion-font-family: 'OpenSans', sans-serif;
+}
+
+:root[mode=md] {
+  --ion-font-family: 'OpenSans', sans-serif;
+}
+
+:root[mode=ios] {
+  --ion-font-family: 'OpenSans', sans-serif;
+}

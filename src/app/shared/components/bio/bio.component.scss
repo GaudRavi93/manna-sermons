@@ -1,0 +1,31 @@
+.cont {
+  padding: 20px;
+  color: var(--ion-color-mid-grey);
+  background-color: var(--reg-color);
+
+  p {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--reg-tab-color);
+    margin: 0;
+    text-align: justify;
+  }
+}
+
+h3 {
+  position: relative;
+  margin: 0;
+  padding: 18px 20px;
+  font-size: 17px;
+  font-weight: bold;
+  border-bottom: 1px solid #e4e4e4;
+  color: var(--active-badge-color);
+  background-color: var(--reg-tab-bg);
+
+  ion-icon {
+    position: absolute;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}

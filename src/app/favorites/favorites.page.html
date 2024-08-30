@@ -1,0 +1,46 @@
+<app-header-main
+  *ngIf="isFavorites || !!search"
+  title="Your Favorite Sermons"
+  [clearText]="clearText"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content>
+  <ng-container *ngIf="!isFavorites && !isLoad && !search">
+    <img class="logo" src="assets/icon/favorite-logo-p.svg" alt="">
+    <h3>Your Favorite Sermons</h3>
+    <p class="desc">Click the heart by your favorite sermons. This will save the sermon to your favorites list allowing you to easily refer to them.</p>
+
+    <ion-button class="exploring-btn" (click)="gotoTopics()" color="header-color" expand="block">Start Exploring Sermon Topics</ion-button>
+  </ng-container>
+
+  <div *ngIf="!isFavorites && !isLoad && !!search" nf-wrapper>
+    <app-no-found></app-no-found>
+  </div>
+
+
+
+  <app-topics
+    *ngIf="topics && topics.length"
+    [topics]="topics"
+    [isShowAll]="true"
+    [allowActive]="true"
+    (setActive)="filterByTopic($event)"
+  ></app-topics>
+
+  <app-video-list
+    [sermons]="filteredList"
+    [showTrash]="true"
+    (onClick)="openConfirmation($event)"
+    (onClickVideo)="gotoSermonDetail($event)"
+    (onClickPreview)="gotoSermonDetail($event)"
+  ></app-video-list>
+
+  <div *ngIf="!isLoad && isFavorites" class="btn-cont-more">
+    <ion-button (click)="gotoTopics()" color="header-color" expand="block">Explore More Sermon Topics</ion-button>
+  </div>
+
+  <div class="loader" *ngIf="isLoad">
+    <ion-spinner></ion-spinner>
+  </div>
+</ion-content>

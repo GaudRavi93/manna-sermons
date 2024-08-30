@@ -1,0 +1,17 @@
+ion-content {
+  --padding-top: 20px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+
+  .link {
+    text-decoration: underline;
+    color: var(--ion-color-mid-grey);
+  }
+
+  .form {
+    margin: 20px auto;
+    width: 90%;
+    height: 300px;
+    background-color: var(--ion-color-eb);
+  }
+}

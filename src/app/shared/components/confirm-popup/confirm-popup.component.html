@@ -1,0 +1,15 @@
+<h3>
+  {{data.title}}
+  <ion-icon name="close-outline" (click)="close(false)"></ion-icon>
+</h3>
+
+<div class="cont">
+  <p>{{data.text}}</p>
+  <div class="btn-cont">
+    <ion-button (click)="close(true)" color="header-color">Yes, I am Sure</ion-button>
+    <div class="btn-cancel" (click)="close(false)">
+      Cancel
+    </div>
+  </div>
+</div>
+

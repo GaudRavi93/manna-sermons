@@ -1,0 +1,153 @@
+<app-header
+  title="Account Information"
+  [showSave]="true"
+  [isSaveActive]="saveIsActive"
+  (save)="updateAcc()"
+></app-header>
+
+<ion-content *ngIf="user">
+  <ion-input [(ngModel)]="user.given_name" (ngModelChange)="isChangeUser()" autocapitalize="words" full>
+    <span class="label">First name</span>
+  </ion-input>
+
+  <ion-input [(ngModel)]="user.family_name" (ngModelChange)="isChangeUser()" autocapitalize="words" full>
+    <span class="label">Last name</span>
+  </ion-input>
+
+  <ion-input [(ngModel)]="user.email" (ngModelChange)="isChangeUser()" full>
+    <span class="label">Email</span>
+  </ion-input>
+
+  <ion-input [(ngModel)]="user.city" (ngModelChange)="isChangeUser()"  autocapitalize="words" full>
+    <span class="label">City</span>
+  </ion-input>
+
+  <ion-grid st-zip>
+    <ion-row>
+      <ion-col>
+        <ion-input [(ngModel)]="user.stateName"
+                   (ngModelChange)="isChangeUser()"
+                   type="text"
+                   (click)="openPicker(0)"
+                   full
+                   readonly
+        >
+          <ion-icon name="chevron-down-outline"></ion-icon>
+          <span class="label">State</span>
+        </ion-input>
+
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="user.zip"
+                   (ngModelChange)="zipChange()"
+                   type="tel"
+                   maxlength="6"
+                   full
+        >
+          <span class="label">Zip Code</span>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="input-cont">
+    <ion-input [(ngModel)]="user.password"
+               placeholder="New Password"
+               (ngModelChange)="isChangeUser()"
+               [type]="isVisiblePass ? 'text' : 'password'"
+               class="pass"
+    >
+    </ion-input>
+
+    <img *ngIf="isVisiblePass" src="../../../assets/icon/eye.svg" (click)="togglePassVisible()">
+    <img *ngIf="!isVisiblePass" src="../../../assets/icon/eye-off.svg" (click)="togglePassVisible()">
+  </div>
+
+  <div class="pass-note">Must be at least 6 characters</div>
+
+  <div class="input-cont">
+    <ion-input [(ngModel)]="user.password_confirmation"
+               placeholder="New Password Confirmation"
+               (ngModelChange)="isChangeUser()"
+               [type]="isVisiblePass ? 'text' : 'password'"
+               class="pass"
+    >
+    </ion-input>
+
+    <img *ngIf="isVisiblePass" src="../../../assets/icon/eye.svg" (click)="togglePassVisible()">
+    <img *ngIf="!isVisiblePass" src="../../../assets/icon/eye-off.svg" (click)="togglePassVisible()">
+  </div>
+
+  <div class="pass-note">Must be at least 6 characters</div>
+
+  <div class="or-cont">
+    <span class="line"></span>
+    <div>Optional Information</div>
+    <span class="line"></span>
+  </div>
+
+  <ion-grid st-zip>
+    <ion-row>
+      <ion-col>
+        <ion-input [(ngModel)]="user.age"
+                   placeholder="Age"
+                   type="text"
+                   (ngModelChange)="isChangeUser()"
+                   (click)="openPicker(1)"
+                   readonly
+        >
+        <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-input>
+      </ion-col>
+      <ion-col>
+
+        <ion-input [(ngModel)]="user.gender"
+                   placeholder="Gender"
+                   type="text"
+                   (ngModelChange)="isChangeUser()"
+                   (click)="openPicker(2)"
+                   readonly
+        >
+        <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    
+  <ion-input [(ngModel)]="user.church_name"
+    placeholder="Church Home/Affiliation"
+    (ngModelChange)="isChangeUser()"
+    (ionChange)="isEmpty()"
+    type="text"
+    autocapitalize="words"
+  >
+
+  </ion-input>
+  <ion-input [(ngModel)]="user.pastor_name"
+    placeholder="Pastor Name"
+    type="text"
+    autocapitalize="words"
+    [readonly]="user.church_name ==='' || user.church_name === null"
+  >
+  </ion-input>
+  <ion-input [(ngModel)]="user.church_city"
+    placeholder="City"
+    type="text"
+    autocapitalize="words"
+    [readonly]="user.church_name ==='' || user.church_name === null"
+    (ngModelChange)="isChangeUser()"
+  >
+  </ion-input>
+  <ion-input [(ngModel)]="user.church_state"
+    placeholder="State"
+    type="text"
+    (click)="user.church_name ===''  || user.church_name === null? '' : openPicker(3)"
+    (ngModelChange)="isChangeUser()"
+    readonly
+  >
+
+  <ion-icon name="chevron-down-outline"></ion-icon>
+  </ion-input>
+
+
+</ion-content>

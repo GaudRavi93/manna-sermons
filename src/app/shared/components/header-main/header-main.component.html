@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons *ngIf="showBack" slot="start">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <div class="click-area" (click)="goBack()"></div>
+    </ion-buttons>
+
+    <div *ngIf="showTabs" class="logo">
+      <img src="../../../../assets/icon/manna-w.svg" alt="">
+    </div>
+
+    <ion-title *ngIf="title" center>
+      <div class="title-cont">
+        <div *ngIf="icoUrl" class="img-cont">
+          <img [src]="icoUrl">
+        </div>
+        {{title}}
+      </div>
+    </ion-title>
+
+    <div class="tab-cont" *ngIf="showTabs">
+      <div class="tab-item" (click)="onClick('topics')">
+        <img class="list" [src]="isDark ? 'assets/icon/list-w.svg' : 'assets/icon/list-y.svg'" alt="">
+        Topics
+      </div>
+      <div class="tab-item" (click)="onClick('pastors')">
+        <img class="pastors" [src]="isDark ? 'assets/icon/person-w.svg' : 'assets/icon/person-y.svg'" alt="">
+        Pastors
+      </div>
+      <div class="tab-item" (click)="onClick('churches')">
+        <img [src]="isDark ? 'assets/icon/church-w.svg' : 'assets/icon/church-y.svg'" alt="">
+        Churches
+      </div>
+    </div>
+    <ion-input
+      *ngIf="inputIsGradient && showSearch"
+      class="white"
+      [(ngModel)]="searchText"
+      ngDefaultControl
+      [disabled]="isInputDisable"
+      [placeholder]="placeholder"
+      (keyup.enter)="searchIsChange()"
+      (click)="searchIsInFocus()"
+    >
+      <ion-img src="assets/icon/search-w.svg"></ion-img>
+    </ion-input>
+  </ion-toolbar>
+  <div *ngIf="!inputIsGradient && showSearch" class="input-cont">
+    <ion-input
+      [(ngModel)]="searchText"
+      ngDefaultControl
+      [placeholder]="placeholder"
+      (keyup.enter)="searchIsChange()"
+    >
+      <ion-img src="assets/icon/search-p.svg"></ion-img>
+    </ion-input>
+  </div>
+
+</ion-header>

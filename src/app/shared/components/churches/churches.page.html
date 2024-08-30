@@ -1,0 +1,33 @@
+<!--<app-header [title]="'Churches'"></app-header>-->
+<app-header-main
+  title="Churches"
+  [showBack]="true"
+  placeholder="Search Churches, City, State"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content>
+  <ng-container *ngFor="let ch of churches; let i = index">
+    <div class="item" *ngIf="!ch.char" (click)="chooseChurch(ch)" [ngClass]="(i+1) < churches.length && churches[i+1].char ? '' : 'item-no-last'">
+      <h5>{{ch.name}}</h5>
+      <p>{{ch.city}}, {{ch.state}}</p>
+    </div>
+
+    <div class="char" *ngIf="ch.char">
+      {{ch.char}}
+    </div>
+  </ng-container>
+
+  <!--<div class="indexChars">
+    <div class="ch" *ngFor="let char of charList">
+      {{char}}
+    </div>
+  </div>-->
+
+  <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

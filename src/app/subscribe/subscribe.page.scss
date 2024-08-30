@@ -1,0 +1,38 @@
+.subscription-cont {
+  padding: 0 20px;
+
+  & .logo {
+    margin: 20px auto;
+    width: 156px;
+    height: 156px;
+  }
+
+  & .sub-info {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    color: var(--ion-color-mid-grey);
+  }
+
+  & .help {
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  & .extra-link {
+    margin: 20px auto;
+    text-align: center;
+
+    span {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+

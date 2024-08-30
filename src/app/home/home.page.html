@@ -1,0 +1,60 @@
+<app-header-main
+  [showTabs]="true"
+  [inputIsGradient]="true"
+  [clearText]="clearText"
+  (searching)="search($event)"
+  (tapSearch)="gotoSearch()"
+  (tabClick)="goto($event)"
+></app-header-main>
+
+<!-- <ion-content [fullscreen]="true"> -->
+  <ion-content>
+  <ng-container *ngIf="!isLoad">
+
+    <app-topics
+      title="Trending Sermon Keywords"
+      [isHome]="true"
+      [topics]="keywords"
+      (setActive)="gotoSermons($event)"
+    ></app-topics>
+    <!-- <div class="cont-contrast">
+      <app-topics
+        title="Trending Sermon Topics"
+        [topics]="keywords"
+        (setActive)="gotoTopicDetail($event)"
+      ></app-topics>
+    </div> -->
+
+    <div class="cont-regular">
+      <h3 header-text>Week’s Featured Pastor</h3>
+
+      <div class="pastor" *ngIf="pastor" (click)="showPastorDetail(pastor.id)">
+        <div mr-15>
+          <div class="yellow-circle">
+            <div class="img-cont">
+              <img [src]="pastor.photo_url || '../../assets/pastor.png'" alt="img">
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 header-text>{{pastor.given_name}} {{pastor.family_name}}</h3>
+          <p>{{pastor.churchName || ''}}</p>
+          <p>{{pastor.city || ''}},{{pastor.state || ''}}</p>
+          <p>{{pastor.sermons || 0}} Sermons • {{pastor.follows_count || 0}} Followers</p>
+        </div>
+      </div>
+
+      <h3 header-text>Recently Added</h3>
+      <app-video-recent
+        [sermon]="sermon"
+      ></app-video-recent>
+    </div>
+
+  </ng-container>
+
+  <div class="loader" *ngIf="isLoad">
+    <ion-spinner></ion-spinner>
+  </div>
+
+</ion-content>

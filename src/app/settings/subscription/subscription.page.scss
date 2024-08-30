@@ -1,0 +1,34 @@
+ion-content {
+  --padding-top: 10px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+
+  color: var(--ion-color-mid-grey);
+  font-size: 14px;
+
+  ion-grid, ion-row, ion-col {
+    padding: 0;
+  }
+
+  span {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  h3 {
+    color: var(--reg-tab-color);
+  }
+
+  [header-text] {
+    margin: 20px 0 12px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  ion-grid {
+    padding: 20px 0;
+    border-bottom: 1px solid #ebe2d7;
+  }
+}

@@ -1,0 +1,40 @@
+<app-header-main
+  title="Pastors"
+  [showBack]="true"
+  placeholder="Search Pastors, City, State"
+  (searching)="searchIsChange($event)"
+></app-header-main>
+
+<ion-content [scrollEvents]="true">
+  <app-pastor
+    *ngFor="let p of pastors; let i = index"
+    [pastor]="p"
+    [isPadding]="true"
+    [isShowBottomLine]="(i+1) < pastors.length && !pastors[i+1].char"
+    (showPastor)="choosePastor($event)"
+  ></app-pastor>
+
+  <!--<ng-container *ngFor="let p of pastors">
+    <div class="item" *ngIf="!p.char" (click)="choosePastor(p.id)">
+      <h5>{{p.family_name}} {{p.given_name}}</h5>
+      <p>{{p.city}},{{p.state}}</p>
+    </div>
+
+    <div class="char" *ngIf="p.char">
+      {{p.char}}
+    </div>
+  </ng-container>-->
+
+  <!--<div class="indexChars">
+    <div class="ch" *ngFor="let char of charList">
+      {{char}}
+    </div>
+  </div>-->
+
+  <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

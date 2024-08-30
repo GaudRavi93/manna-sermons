@@ -1,0 +1,123 @@
+ion-header {
+  text-align: center;
+  & ion-title {
+    padding: 0;
+  }
+}
+
+ion-toolbar {
+  --background: linear-gradient(to top, #641634, #d04109);
+  color: var(--reg-color);
+  // padding-bottom: 20px;
+
+  ion-buttons {
+    position: absolute;
+
+    .click-area {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: -13px;
+      left: 0;
+      cursor: pointer;
+    }
+  }
+
+  [name="chevron-back-outline"] {
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+
+.title-cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & div {
+    display: inline-block;
+    margin-right: 8px;
+  }
+}
+.img-cont {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  & img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.input-cont {
+  padding: 15px 20px;
+  background: var(--cont-regular-color);
+
+  ion-input {
+    margin: 0;
+    width: 100%;
+    background-color: #fff !important;
+    color: var(--reg-tab-color);
+    --placeholder-color: var(--reg-tab-color);
+  }
+}
+
+.logo {
+  margin: 15px auto 5px;
+  width: 58px;
+  height: 37px;
+}
+
+.tab-cont {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 10px 0;
+
+  .tab-item {
+    display: flex;
+    // border: 1px solid var(--reg-color);
+    border-radius: 16px;
+    background-color: var(--tab-bg);
+    color: var(--reg-color);
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+
+    img {
+      margin-right: 5px;
+    }
+
+    img.pastors {
+      width: 14px;
+      height: 14px;
+      align-self: center;
+    }
+
+    img.list{
+      width: 18px;
+      height: 10px;
+      align-self: center;
+    }
+
+    ion-icon {
+      vertical-align: bottom;
+      font-size: 14px;
+    }
+  }
+}
+
+ion-input {
+  margin: 12px auto;
+  width: calc(100% - 40px);
+  padding-left: 20px !important;
+  border-radius: 25px;
+  box-shadow: 0 0 14px -2px rgba(0, 0, 0, 0.16);
+  border: solid 1px rgba(255, 255, 255, 0.28);
+  background-color: var(--input-bg) !important;
+  font-size: 13px;
+  --placeholder-color: var(--reg-color);
+  --placeholder-opacity: 0.7;
+}

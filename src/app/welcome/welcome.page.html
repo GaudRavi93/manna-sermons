@@ -1,0 +1,81 @@
+<ion-content>
+  <div class="logo" (click)="showSHA()">
+    <img src="../../assets/img/manna.svg" alt="">
+  </div>
+
+  <ng-container *ngIf="isVisibleEmailSign">
+    <h2 center>Sign Up</h2>
+    <p class="lato">
+      Please enter your information to start.
+    </p>
+
+    <ion-input [(ngModel)]="userData.email"
+               placeholder="Email"
+               type="email"
+    >
+    </ion-input>
+
+    <div class="input-cont">
+      <ion-input [(ngModel)]="userData.password"
+                 placeholder="Password"
+                 [type]="isVisiblePass ? 'text' : 'password'"
+      >
+      </ion-input>
+
+      <img *ngIf="isVisiblePass" src="../../assets/icon/eye.svg" (click)="togglePassVisible()">
+      <img *ngIf="!isVisiblePass" src="../../assets/icon/eye-off.svg" (click)="togglePassVisible()">
+    </div>
+
+    <div class="must">Must be at least 6 characters</div>
+
+    <div class="input-cont">
+      <ion-input [(ngModel)]="userData.password_confirmation"
+                 placeholder="Password Confirmation"
+                 [type]="isVisiblePass ? 'text' : 'password'"
+      >
+      </ion-input>
+
+      <img *ngIf="isVisiblePass" src="../../assets/icon/eye.svg" (click)="togglePassVisible()">
+      <img *ngIf="!isVisiblePass" src="../../assets/icon/eye-off.svg" (click)="togglePassVisible()">
+    </div>
+
+    <div class="must">Must be at least 6 characters</div>
+
+    <ion-button (click)="register()" [disabled]="!isValid()" color="btn-bg" expand="block" mt20>Create An Account</ion-button>
+        <div (click)="toggleSign()" back>Back To Welcome</div>
+  </ng-container>
+
+  <ng-container *ngIf="!isVisibleEmailSign">
+    <h2 center (click)="testAlert()">Over 1,500 sermons and 150 pastors to explore</h2>
+    <p class="lato">
+      Sign up today and grow your Christian journey.
+    </p>
+
+    <ion-button (click)="toggleSign()" color="btn-bg" expand="block">Sign Up</ion-button>
+
+    <div class="login" (click)="gotoLogin()">
+      Log In
+    </div>
+    <!--<ion-button (click)="gotoLogin()" color="mid-grey" expand="block">Log In</ion-button>-->
+
+    <div class="or-cont">
+      <span class="line"></span>
+      or
+      <span class="line"></span>
+    </div>
+
+    <ion-button *ngIf="isAppleSignVisible" color="black" expand="block" (click)="signApple()">
+      <img class="badge" src="../../assets/icon/apple.svg" alt="">
+      Sign in with Apple
+    </ion-button>
+    <ion-button color="light-blue" expand="block" (click)="signInWithGoogle()">
+      <img class="badge" src="../../assets/icon/google.svg" alt="">
+      Sign in with Google
+    </ion-button>
+    <ion-button color="fb-color" expand="block" (click)="signInWithFB()">
+      <img class="badge" src="../../assets/icon/fb_w.svg" alt="">
+      Sign in with Facebook
+    </ion-button>
+  </ng-container>
+
+</ion-content>

@@ -1,0 +1,11 @@
+.ios {
+  .sc-ion-input-ios-h {
+    --padding-start: 10px
+  }
+  ion-input {
+
+    & ion-img {
+      // margin-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+div {
+  background-color: var(--ion-color-white);
+  color: var(--reg-tab-color);
+  font-size: 13px;
+  margin: 0 6px 0 0;
+  padding: 7px 9px 8px 10px;
+  border-radius: 17.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  border: solid 1px var(--badge-border);
+}
+
+.active {
+  background-color: var(--active-badge-color);
+  color: var(--reg-color);
+}

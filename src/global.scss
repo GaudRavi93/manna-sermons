@@ -1,0 +1,274 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@import "theme/colors.scss";
+@import "theme/popovers.scss";
+@import "theme/fonts.scss";
+@import "theme/ios.scss";
+
+ion-content, [regular-bg] {
+  background: var(--cont-regular-color);
+  --background: var(--cont-regular-color);
+}
+
+h3, h4, h5, ion-button {
+  font-family: 'OpenSans-Bold', sans-serif;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 23px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.09;
+}
+
+.lato {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  text-align: center;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+ion-button {
+  height: 48px;
+  --border-radius: 27.5px;
+  text-transform: none;
+  font-size: 14px;
+}
+
+ion-input {
+  margin: 20px 0 20px;
+  height: 50px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 14px !important;
+  border: 1px solid #e4e4e4;
+  color: var(--ion-color-mid-grey) !important;
+  background-color: #fff !important;
+  font-size: 13px !important;
+  text-align: left;
+
+  ion-icon {
+    position: absolute;
+    right: 14px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  [sign] {
+    padding-left: 10px;
+  }
+}
+
+.input-cont {
+  position: relative;
+
+  ion-icon, img {
+    position: absolute;
+    top: 13px;
+    right: 14px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 10;
+  }
+}
+
+.yellow {
+  background-color: var(--yellow) !important;
+}
+
+.yellow-circle {
+  width: 116px;
+  height: 116px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+  border: solid 3px var(--yellow);
+
+  & .img-cont {
+    width: 103px;
+    height: 103px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+
+    & img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    & ion-icon {
+      font-size: 48px;
+    }
+  }
+}
+
+.loader {
+  padding: 50px 0;
+  text-align: center;
+
+  ion-spinner {
+    font-size: 48px;
+  }
+}
+
+.btn-cont-more {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--cont-contrast-color);
+}
+
+.social-cont {
+  display: flex;
+  justify-content: center;
+
+  ion-icon {
+    margin: 0 10px;
+    font-size: 40px;
+  }
+}
+
+.arrow-cont {
+  padding: 20px;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+/*welcome section*/
+.logo {
+  margin: 80px auto 56px;
+  width: 172px;
+  height: 111px;
+  overflow: hidden;
+
+  & img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.cont-contrast {
+  padding: 1px 0 0 15px;
+  background: var(--cont-contrast-color);
+}
+
+.cont-regular {
+  padding: 1px 20px 0;
+  background: var(--cont-regular-color);
+}
+
+.must {
+  font-size: 11px;
+}
+
+.white {
+  color: var(--ion-color-white) !important;
+}
+
+[pointer] {
+  cursor: pointer;
+}
+
+[underline] {
+  text-decoration: underline;
+}
+
+[center] {
+  text-align: center;
+}
+
+[right] {
+  text-align: right;
+}
+
+[left] {
+  text-align: left;
+}
+
+[header-text] {
+  text-align: left;
+  margin: 30px 0 12px;
+  font-family: OpenSans-Bold;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--ion-color-header-color);
+}
+
+[content] {
+  font-family: OpenSans;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  color: var(--ion-color-mid-grey);
+}
+
+[nf-wrapper] {
+  padding: 20px;
+}
+
+.prl20 {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+[mt20] {
+  margin-top: 20px;
+}
+
+[mr-20] {
+  margin-right: 20px;
+}
+
+[mr-15] {
+  margin-right: 15px;
+}

@@ -1,0 +1,63 @@
+ion-content {
+
+  ion-button {
+    font-size: 13px;
+  }
+
+  .social {
+    background-color: var(--cont-contrast-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0 20px;
+
+    & .follow-btn-cont {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 10px 0 0;
+      padding: 0 15px;
+      border-radius: 22px;
+      border: solid 1px var(--badge-border);
+      height: 38px;
+      color: var(--active-badge-color);
+      background: var(--ion-color-white);
+      font-family: OpenSans-Bold;
+      font-size: 13px;
+      cursor: pointer;
+
+      & img {
+        width: 15px;
+        height: 15px;
+        margin: 0 5px;
+      }
+    }
+  }
+
+  .content-cont {
+    padding: 10px 20px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .bio {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    font-size: 13px;
+    font-family: OpenSans;
+    color: var(--ion-color-mid-grey);
+    cursor: pointer;
+  }
+
+  .sermon-list {
+    padding: 0;
+
+    ion-row {
+      padding: 0;
+    }
+  }
+}
+

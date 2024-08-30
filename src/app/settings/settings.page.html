@@ -1,0 +1,18 @@
+<app-header title="Settings"></app-header>
+
+<ion-content>
+  <ion-list regular-bg>
+    <ion-item *ngFor="let item of list" (click)="gotoPage(item)" regular-bg>
+      <div class="p20">
+        {{item.name}}
+      </div>
+      <ion-icon name="chevron-forward-outline" color="header-color"></ion-icon>
+    </ion-item>
+    <ion-item (click)="openConfirmation()" regular-bg>
+      <div class="p20">
+        Log Out
+      </div>
+      <ion-icon name="chevron-forward-outline" color="header-color"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

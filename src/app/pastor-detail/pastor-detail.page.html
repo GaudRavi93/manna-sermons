@@ -1,0 +1,50 @@
+<app-header [pastor]="pastor" [isLoad]="isLoad"></app-header>
+
+<ion-content>
+  <ng-container *ngIf="pastor && !isLoad">
+    <div class="social">
+      <div (click)="follow(pastor.id)" [ngClass]="pastor.followed ? 'yellow' : ''" class="follow-btn-cont">
+        <img class="logo" src="assets/icon/followers-p.svg" alt="">
+        {{pastor.followed ? 'Unfollow' : 'Follow this Pastor'}}
+      </div>
+
+      <app-social [pastor]="pastor"></app-social>
+    </div>
+
+
+    <div class="content-cont">
+      <ng-container *ngIf="!!pastor.bio">
+        <p content>{{pastor.bio | trunc}}</p>
+        <div (click)="showBio()" class="bio">View Full Bio</div>
+      </ng-container>
+
+      <ion-button (click)="gotoSermons()" color="header-color" expand="block">View All Sermons</ion-button>
+
+      <h3 header-text *ngIf="sermons && sermons.length">
+        Recent Sermons
+      </h3>
+
+      <ion-grid class="sermon-list">
+        <ion-row>
+          <ion-col *ngFor="let sermon of sermons">
+            <app-video-recent
+              [sermon]="sermon"
+              [showPastorImg]="false"
+            ></app-video-recent>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <app-topics
+      *ngIf="topics && topics.length"
+      title="Sermon Topics"
+      [topics]="topics"
+    ></app-topics>
+  </ng-container>
+
+  <div class="loader" *ngIf="isLoad">
+    <ion-spinner></ion-spinner>
+  </div>
+
+</ion-content>

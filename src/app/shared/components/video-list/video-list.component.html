@@ -1,0 +1,29 @@
+<ion-grid *ngIf="sermonList">
+  <ion-row *ngFor="let s of sermonList">
+    <ion-col (click)="isClickPreview(s.id)">
+      <div class="flex-cont">
+        <div class="img-cont">
+          <img [src]="s.video.thumbnail_url" alt="">
+        </div>
+        <div class="info-cont">
+          <h3>{{s.title}} {{pastorMap[s.pastor_id]}}</h3>
+          <p>• {{s.video.video_views_count}} views
+        </div>
+      </div>
+
+      <!--<iframe width="150px" height="100px" [src]="s.video.embed_url | safe: 'resourceUrl'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+    </ion-col>
+    <!--<ion-col class="info" (click)="isClickInfo(s.id)" left>
+      <h3>{{s.title}}</h3>
+      <p>• {{s.video.video_views_count}} views • {{s.video.created_at | ago}} ago</p>
+    </ion-col>-->
+    <ion-col size="1" (click)="isClick(s.id)" pointer>
+      <ion-icon *ngIf="showArrow" name="chevron-forward-outline"></ion-icon>
+      <!--<ion-icon *ngIf="showTrash" name="trash-outline"></ion-icon>-->
+      <div *ngIf="showTrash" class="trash-cont">
+        <img src="../../../../assets/icon/delete.svg" alt="">
+      </div>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>

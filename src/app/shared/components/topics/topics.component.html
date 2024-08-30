@@ -1,0 +1,27 @@
+<div [ngClass]="noBackground ? '' : 'cont-contrast'">
+  <h3 header-text *ngIf="title">
+    {{title}}
+  </h3>
+  <div class="empty" *ngIf="!title && !isHome"></div>
+
+  <div class="container" [ngClass]="'container-' + counter">
+    <div class="content strong-content" [ngClass]="'content-' + counter">
+      <app-badge
+        *ngIf="isShowAll"
+        text="All"
+        [id]="-1"
+        [isActive]="active === 'All'"
+        (onClickBadge)="changeActive(-1)"
+      ></app-badge>
+
+      <app-badge
+        *ngFor="let t of topicList; let i = index"
+        [text]="t"
+        [id]="i"
+        [isActive]="t === active"
+        (onClickBadge)="changeActive(i)"
+      ></app-badge>
+    </div>
+  </div>
+  <div [ngClass]="isHome ? 'empty-home' : 'empty'" class="empty"></div>
+</div>

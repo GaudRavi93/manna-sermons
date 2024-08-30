@@ -1,0 +1,93 @@
+ion-content {
+  --padding-top: 20px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+}
+
+ion-input[full] {
+  margin: 5px 0 20px;
+  --padding-start: 15px;
+  --padding-top: 25px;
+  height: 56px;
+  position: relative;
+
+  .label {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 11px;
+    color: var(--reg-tab-color);
+    opacity: 0.6;
+  }
+}
+
+ion-grid, ion-row {
+  padding: 0;
+}
+
+ion-input.pass {
+  margin-bottom: 0;
+}
+
+.pass-note {
+  opacity: 0.6;
+  font-size: 11px;
+  color: var(--ion-color-mid-grey);
+  margin-bottom: 20px;
+}
+
+[st-zip] {
+  padding: 0;
+
+  & ion-col {
+    padding: 0;
+  }
+
+  & ion-col:first-of-type {
+    position: relative;
+    margin-right: 20px;
+
+    & ion-icon {
+      position: absolute;
+      right: 10px;
+      width: 15px;
+    }
+  }
+}
+
+.or-cont {
+  margin: 34px auto 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .line {
+    width: 146px;
+    border-bottom: 1px solid #ebe2d7;
+    margin: 0 10px;
+  }
+}
+
+.custom-church {
+  margin: 20px 0;
+  padding: 15px 20px 1px;
+  background-color: var(--reg-tab-bg);
+
+  ion-input {
+    --background: #fff;
+  }
+}
+
+.ch-cont {
+  padding: 10px;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+
+  ion-checkbox {
+    margin-right: 10px;
+  }
+}
+
+

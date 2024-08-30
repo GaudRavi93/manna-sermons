@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <div class="click-area" (click)="goBack()"></div>
+    </ion-buttons>
+
+    <ion-title center>
+      <div class="title-cont">
+        Search
+      </div>
+    </ion-title>
+
+    <div class="input-cont">
+      <ion-input
+        [(ngModel)]="searchText"
+        ngDefaultControl
+        debounce="1000"
+        [placeholder]="placeholder"
+        (ionChange)="searchIsChange(searchText)"
+      >
+        <ion-img src="assets/icon/search-p.svg"></ion-img>
+      </ion-input>
+    </div>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content center>
+  <app-no-found *ngIf="isShowNoFound"></app-no-found>
+
+  <app-video-list
+    *ngIf="sermons"
+    [sermons]= "sermons"
+    (onClickVideo)="gotoSermonDetail($event)"
+    (onClickPreview)="gotoSermonDetail($event)"
+  ></app-video-list>
+
+  <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
