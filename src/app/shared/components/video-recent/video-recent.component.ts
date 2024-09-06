@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISermon } from '../../models/sermon';
 import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-video-recent',
@@ -13,11 +14,18 @@ export class VideoRecentComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private pl: Platform
   ) { }
 
   ngOnInit() {}
 
   public openSermonDetail() {
+    this.pl.ready().then(() => {
+      (window as any).cordova.plugins.firebase.analytics.
+      logEvent('play_button', {
+          sermon_id: this.sermon.id,
+      });
+    });
     this.router.navigate([`sermon-detail/${this.sermon.id}`]);
   }
 

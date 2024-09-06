@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-topics',
@@ -11,6 +12,7 @@ export class TopicsComponent implements OnInit {
       return;
     }
     this.topicList = val;
+  
 
     setTimeout(()=> {
       const counter = parseInt(sessionStorage.getItem('m-counter'), 10) || 0;
@@ -44,18 +46,38 @@ export class TopicsComponent implements OnInit {
   private isMoved = false;
   private boxWishes: Element;
 
-  constructor() { }
+  private categoryStartTime: number;
+
+  constructor(
+    private pl: Platform
+  ) {
+  }
 
   ngOnInit() {
     if (this.allowActive && this.isShowAll) {
       this.active = 'All';
+    }
+    if(this.topicList && this.topicList.length > 0) {
+      const categories = JSON.stringify(this.topicList);
+      this.pl.ready().then(() => {
+        (window as any).cordova.plugins.firebase.analytics.logEvent('categories', { param1: categories });
+      });
     }
   }
 
   public changeActive(indx: number) {
     this.setActive.emit(indx);
     this.active = this.allowActive ?
-      indx == -1 ? 'All' : this.topicList[indx] : '';
+    indx == -1 ? 'All' : this.topicList[indx] : '';
+    this.logCategoryStart(this.topicList[indx]);
+  }
+
+  private logCategoryStart(category: string) {
+    this.categoryStartTime = new Date().getTime();
+    (window as any).cordova.plugins.firebase.analytics.logEvent('category_start', {
+      'category': category,
+      'startTime': this.categoryStartTime
+    });
   }
 
   private handleTouchStart(e) {

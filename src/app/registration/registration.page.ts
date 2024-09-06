@@ -146,6 +146,11 @@ export class RegistrationPage implements OnInit, OnDestroy {
 
       // if (this.pay.isOk())
         this.router.navigate(['home']);
+      (window as any).cordova.plugins.firebase.analytics.logEvent('sign_up', {
+        userId: user.id,
+        username: user.given_name,
+        email: user.email
+      });
       // else
       //   this.router.navigate(['subscribe']);
     });

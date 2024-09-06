@@ -22,6 +22,16 @@ import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AppLauncher } from '@ionic-native/app-launcher/ngx';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { AngularFireModule } from '@angular/fire';
+
+const firebaseConfig = {
+  projectId: "manna-328020",
+  messagingSenderId: "841498643762",
+  storageBucket: "manna-328020.appspot.com",
+  authDomain: "manna-328020.firebaseapp.com",
+  apiKey: "AIzaSyAQmxZqmayWACkOgKrDGwyUcZvCLRC4JjY",
+  appId: "1:841498643762:web:a614101d68db3b511d1b2b"
+};
 
 // import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
@@ -37,6 +47,7 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
     HttpClientModule,
     IonicModule.forRoot({ animated: true }),
     AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [
     // InAppPurchase2,

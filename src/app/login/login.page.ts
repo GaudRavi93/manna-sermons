@@ -124,6 +124,11 @@ export class LoginPage implements OnInit {
           }
           else {
             this.router.navigate(['home']);
+            (window as any).cordova.plugins.firebase.analytics.logEvent('login', {
+              userId: user.id,
+              username: user.given_name,
+              email: user.email
+            });
             if (this.pay.isOk()){
               this.openConfirmation();
             }
@@ -172,6 +177,11 @@ export class LoginPage implements OnInit {
               this.router.navigate(['registration']);
           } else {
             this.router.navigate(['home']);
+            (window as any).cordova.plugins.firebase.analytics.logEvent('login', {
+              userId: user.id,
+              username: user.given_name,
+              email: user.email
+            });
             // deepLink for only native devices
             if (this.pl.is('cordova')) {
               this.deeplinks.routeWithNavController(this.navCtrl, {

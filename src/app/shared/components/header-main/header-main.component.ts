@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectorRef } fro
 import { Router } from '@angular/router';
 import { NavigationService } from '../../services/navigation.service';
 import { DarkService } from '../../services/dark.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-header-main',
@@ -31,7 +32,8 @@ export class HeaderMainComponent implements OnInit {
     private router: Router,
     private nav: NavigationService,
     private cdr: ChangeDetectorRef,
-    private darkService: DarkService
+    private darkService: DarkService,
+    private pl: Platform
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,10 @@ export class HeaderMainComponent implements OnInit {
   }
 
   public onClick(tab: string) {
+    this.pl.ready().then(() => {
+      (window as any).cordova.plugins.firebase.analytics.logEvent(tab, { param1: tab });
+    });
+    
     this.tabClick.emit(tab);
   }
 }

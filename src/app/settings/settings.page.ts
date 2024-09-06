@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ISettingItem } from '../shared/models/user';
+import { ISettingItem, IUser } from '../shared/models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { ConfirmPopupComponent } from '../shared/components/confirm-popup/confirm-popup.component';
 import { popupText, URLS } from '../constants';
 import { AuthService } from '../shared/services/auth.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -21,6 +22,7 @@ export class SettingsPage implements OnInit {
     public popoverController: PopoverController,
     private iab: InAppBrowser,
     private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,14 @@ export class SettingsPage implements OnInit {
       if (r.data) {
         this.authService.logout();
         this.router.navigate([`/`]);
+        this.userService.getUserData().subscribe(userRes => {
+          const user: IUser = userRes;
+          (window as any).cordova.plugins.firebase.analytics.logEvent('logout', {
+            userId: user.id,
+            username: user.given_name,
+            email: user.email
+          });
+        })
       }
     });
   }

@@ -41,7 +41,13 @@ export class ChurchDetailPage implements OnInit {
   private fetchData(id: number) {
     this.dataService.getChurchDetail(id).subscribe(res => {
       this.church = res;
-
+      (window as any).cordova.plugins.firebase.analytics.
+        logEvent('church_details', {
+            "id": this.church.id,
+            "name": this.church.name,
+            "city": this.church.city,
+            "state": this.church.state 
+        });
     });
 
     this.dataService.getChurchPastors(id).subscribe(res => {

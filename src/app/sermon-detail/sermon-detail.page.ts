@@ -67,7 +67,17 @@ export class SermonDetailPage implements OnInit {
     const url = `https://app.mannasermons.com?videoId=${this.videoId}`;
     const text = `Check out this impactful message ‘${this.sermon.title}’ by ${this.pastor.given_name} ${this.pastor.family_name}.\nView it on Manna - Sermons for the Soul ${url}\n\n\nPlease forward to friends & family!`;
     this.socialSharing.share(text, this.sermon.description).then(r => {
-    });
+      (window as any).cordova.plugins.firebase.analytics.logEvent('share', {
+        videoId: this.videoId,
+        pastor_name: this.pastor.given_name,
+      });
+    })
+    .catch(error => {
+      (window as any).cordova.plugins.firebase.analytics.logEvent('share_failed', {
+          videoId: this.videoId,
+          pastor_name: this.pastor.given_name,
+      });
+  });
   }
 
   public showPastorDetail(id: number) {

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-video-player',
@@ -21,17 +22,19 @@ export class VideoPlayerComponent implements OnInit {
   public counter: number;
   private player;
 
-  constructor() { }
+  constructor(
+    private pl: Platform
+  ) { }
 
   ngOnInit() {
   }
 
   public skipIntro() {
     this.player.seekTo(this.startTime);
-    this.player.playVideo();
+    this.player.playVideo();    
   }
 
-  private initPlayer() {
+  private initPlayer() {    
 
     const showPlayer = () => {
       this.player = new (window as any).YT.Player('player-' + this.counter, {
@@ -56,7 +59,7 @@ export class VideoPlayerComponent implements OnInit {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       (window as any).onYouTubeIframeAPIReady = () => {
-        showPlayer();
+        showPlayer();        
       };
 
     } else {
@@ -67,21 +70,28 @@ export class VideoPlayerComponent implements OnInit {
     }
 
     // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-      // event.target.playVideo();
+    function onPlayerReady (event) {
+      // event.target.playVideo();      
     }
 
     // 5. The API calls this function when the player's state changes.
     //    The function indicates that when playing a video (state=1),
     //    the player should play for six seconds and then stop.
     var done = false;
-    function onPlayerStateChange(event) {
+    const onPlayerStateChange = (event) => {
       if (event.data == (window as any).YT.PlayerState.PLAYING && !done) {
         // setTimeout(stopVideo, 6000);
         done = true;
       }
+
+      if(event.data == (window as any).YT.PlayerState.PLAYING) {
+        (window as any).cordova.plugins.firebase.analytics.
+        logEvent('video_play', {
+            "videoId": this.videoId,
+        });
+      }
     }
-    function stopVideo() {
+    const stopVideo = () => {
       this.player.stopVideo();
     }
   }

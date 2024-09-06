@@ -4,7 +4,7 @@ import { DataService } from '../shared/services/data.service';
 import { NavigationService } from '../shared/services/navigation.service';
 import { EventService } from '../shared/services/event.service';
 import { IPastor } from '../shared/models/pastor';
-import { IonContent } from '@ionic/angular';
+import { IonContent, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-pastors',
@@ -26,10 +26,11 @@ export class PastorsPage implements OnInit {
     private dataService: DataService,
     private nav: NavigationService,
     private eventService: EventService,
+    private pl: Platform,
   ) { }
 
   ngOnInit() {
-    this.isOpenDetails = this.router.getCurrentNavigation().extras.state?.openDetails;
+    this.isOpenDetails = this.router.getCurrentNavigation().extras.state?.openDetails;   
   }
 
   ionViewDidEnter() {
@@ -86,6 +87,12 @@ export class PastorsPage implements OnInit {
       this.nextPage = res.pastors.next_page;
       const data = res.pastors.results;
       this.pastors = this.insertChar(isLazy ? this.pastors.concat(data) : data);
+      const serializedData = JSON.stringify(this.pastors);
+      this.pl.ready().then(() => {
+        (window as any).cordova.plugins.firebase.analytics.logEvent('pastors_data', { 
+          data: serializedData,
+         });
+      });
       this.enableInfinite = res.pastors.current_page < res.pastors.total_pages;
       if (event) {
         event.target.complete();

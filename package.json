@@ -29,6 +29,7 @@
   "dependencies": {
     "@angular/common": "~12.1.1",
     "@angular/core": "~12.1.1",
+    "@angular/fire": "^6.1.5",
     "@angular/forms": "~12.1.1",
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
@@ -74,6 +75,7 @@
     "cordova-ios": "^6.3.0",
     "cordova-plugin-app-launcher": "^0.4.0",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-firebase-analytics": "^5.0.0",
     "cordova-plugin-googleplus": "^8.5.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
@@ -130,6 +132,11 @@
         "URL_SCHEME": "com.mannasermons.manna",
         "DEEPLINK_SCHEME": "https",
         "DEEPLINK_HOST": "app.mannasermons.com"
+      },
+      "cordova-plugin-firebase-analytics": {
+        "ANALYTICS_COLLECTION_ENABLED": "true",
+        "AUTOMATIC_SCREEN_REPORTING_ENABLED": "true",
+        "IOS_FIREBASE_ANALYTICS_VERSION": "~> 7.0.0"
       }
     },
     "platforms": [

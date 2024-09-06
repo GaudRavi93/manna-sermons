@@ -26,6 +26,7 @@ export class TopicDetailPage implements OnInit {
   private handler: number;
 
   private filter: IFilter = {} as IFilter;
+  public startTime: number;
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
 
@@ -42,6 +43,14 @@ export class TopicDetailPage implements OnInit {
     this.route.paramMap.pipe(switchMap(params => params.getAll('id'))).subscribe(data => {
       data = (data as any).replaceAll('%2f', '/');
       this.topicName = data;
+      this.startTime = new Date().getTime();
+      const formattedTime = new Date(this.startTime).toLocaleString();
+    
+      (window as any).cordova.plugins.firebase.analytics.logEvent('Topic_'+this.topicName, {
+        'topic': this.topicName,
+        'startTime': formattedTime
+      });
+      
       this.firstPart = data;
       this.fetchData();
     });
@@ -51,6 +60,19 @@ export class TopicDetailPage implements OnInit {
     });
     this.isShowNoFound = false;
     this.clearActive = 0;
+  }
+
+  ngOnDestroy() {
+    const endTime = new Date().getTime();
+    const durationInMillis = endTime - this.startTime;
+    const durationInSeconds = Math.floor(durationInMillis / 1000) + ' sec';
+    const formattedEndTime = new Date(endTime).toLocaleString();
+    
+    (window as any).cordova.plugins.firebase.analytics.logEvent('Topic_End_' + this.topicName, {
+      'topic': this.topicName,
+      'endTime': formattedEndTime,
+      'duration': durationInSeconds
+    });
   }
 
   ionViewDidEnter() {

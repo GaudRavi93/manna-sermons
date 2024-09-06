@@ -75,6 +75,15 @@ export class PastorDetailPage implements OnInit {
 
       this.dataService.getSermons(this.pastor.id, 1).subscribe(re => {
         this.pastor.sermons = re.sermons.results.length > 0 ? re.sermons.total_pages: 0;
+        (window as any).cordova.plugins.firebase.analytics.
+        logEvent('pastor_details', {
+            "id": this.pastor.id,
+            "name": this.pastor.given_name + " " + this.pastor.family_name,
+            "church_name": this.pastor.churchName,
+            "city": this.pastor.city,
+            "state": this.pastor.state 
+        });
+        
       });
 
       this.dataService.getSermons(this.pastor.id, 2).subscribe(re => {
