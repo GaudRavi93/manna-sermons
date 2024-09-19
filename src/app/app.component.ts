@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 import { IUser } from './shared/models/user';
 import { Location } from '@angular/common';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,6 @@ import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 })
 export class AppComponent {
   public showTabs = false;
-
-
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,7 +34,8 @@ export class AppComponent {
     private userService: UserService,
     private deeplinks: Deeplinks,
     private zone: NgZone,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private push: Push,
   ) {
     // this.pay.init();
     
@@ -99,9 +99,44 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  initPush() {
+    const options: PushOptions = {
+      android: {},
+      ios: {
+        alert: 'true',
+        badge: true,
+        sound: 'true'
+      },
+      windows: {},
+    };
+
+    const pushObject: PushObject = this.push.init(options);
+
+    pushObject.on('notification').subscribe((notification: any) => {
+    });
+
+    pushObject.on('registration').subscribe((registration: any) => {
+      console.log("token:",registration.registrationId);
+    });
+
+    pushObject.on('error').subscribe(error => console.error(error));
+    
+  }
+
+  async requestNotificationPermission() {
+    const permission = await this.push.hasPermission();
+    if (permission.isEnabled) {
+      console.log('Permission granted');
+    } else {
+      console.log('Permission denied');
+    }
+  }
 
   private initializeApp() {
     this.pl.ready().then(() => {
+      console.log("1111111");
+      (window as any).cordova.plugins.firebase.analytics.logEvent("my_event", {param1: "value1"});
+      console.log("2222222");
       // Added hardware back button functionality
       this.pl.backButton.subscribeWithPriority(0, () => {
         if (!this.location.isCurrentPathEqualTo('/home')) {
@@ -146,6 +181,10 @@ export class AppComponent {
           });
         }, 5000);
       }
+
+      this.requestNotificationPermission();
+      this.initPush();
+    
     });
   }
 

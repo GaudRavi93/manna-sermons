@@ -9,6 +9,7 @@
     [refresh]="refresher"
     [videoId]="sermon.video.video_key"
     [startTime]="sermon.video.sermon_start_time"
+    [excerpts]="sermon.video.excerpts"
   ></app-video-player>
 
   <div class="content-cont" *ngIf="sermon && pastor">

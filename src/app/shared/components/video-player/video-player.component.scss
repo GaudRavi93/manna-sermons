@@ -17,3 +17,55 @@
     height: 12px;
   }
 }
+
+.skip-sections-container {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-top: 3px;
+  overflow-x: auto;
+  height: 140px;
+  padding-bottom: 10px;
+}
+
+.time-point-wrapper {
+  display: inline-block;
+  flex: none;
+}
+
+.time-point-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: auto;
+  padding: 20px;
+  background-size: cover; 
+  background-position: center;
+  height: 87px;
+  width: 155px;
+  cursor: pointer;
+}
+
+.label {
+  margin-top: 4px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.time {
+  font-weight: bold;
+  margin-top: 1px;
+  font-size: 13px;
+}
+
+.text-div {
+  display: flex;
+  flex-direction: column;
+  padding-left: 2px;
+}
+
+
+

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-video-player',
@@ -10,6 +9,7 @@ export class VideoPlayerComponent implements OnInit {
   @Input() videoId: string;
   @Input() startTime: number;
   @Input() showSkipTime: boolean;
+  @Input() excerpts: any;
   @Input() set refresh (val: number) {
     this.counter = JSON.parse(localStorage.getItem('v-counter') || '0');
     this.counter++;
@@ -18,23 +18,31 @@ export class VideoPlayerComponent implements OnInit {
       this.initPlayer();
     }, 10);
   }
-
   public counter: number;
   private player;
 
+  public skipSections: {label: string, time: number, start_time: string}[] = [];
+  
   constructor(
-    private pl: Platform
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
+    if (this.excerpts && this.excerpts.length > 0) {
+      this.setSkipSections();
+    }
+    
   }
 
   public skipIntro() {
-    this.player.seekTo(this.startTime);
-    this.player.playVideo();    
   }
 
-  private initPlayer() {    
+  public skipToSection(time: number) {
+      this.player.seekTo(time);
+      this.player.playVideo();
+  }
+
+  private initPlayer() {
 
     const showPlayer = () => {
       this.player = new (window as any).YT.Player('player-' + this.counter, {
@@ -59,7 +67,7 @@ export class VideoPlayerComponent implements OnInit {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
       (window as any).onYouTubeIframeAPIReady = () => {
-        showPlayer();        
+        showPlayer();
       };
 
     } else {
@@ -70,30 +78,43 @@ export class VideoPlayerComponent implements OnInit {
     }
 
     // 4. The API will call this function when the video player is ready.
-    function onPlayerReady (event) {
-      // event.target.playVideo();      
+    function onPlayerReady(event) {
+      // event.target.playVideo();
     }
 
     // 5. The API calls this function when the player's state changes.
     //    The function indicates that when playing a video (state=1),
     //    the player should play for six seconds and then stop.
     var done = false;
-    const onPlayerStateChange = (event) => {
+    function onPlayerStateChange(event) {
       if (event.data == (window as any).YT.PlayerState.PLAYING && !done) {
         // setTimeout(stopVideo, 6000);
         done = true;
       }
-
-      if(event.data == (window as any).YT.PlayerState.PLAYING) {
-        (window as any).cordova.plugins.firebase.analytics.
-        logEvent('video_play', {
-            "videoId": this.videoId,
-        });
-      }
     }
-    const stopVideo = () => {
+    function stopVideo() {
       this.player.stopVideo();
     }
   }
 
+  private setSkipSections() {
+     if (this.excerpts && this.excerpts.length > 0) {
+      this.skipSections = this.excerpts.map(excerpt => ({
+        label: excerpt.title,
+        time: excerpt.start_time,
+        start_time: excerpt.formatted_start_time
+      }));
+      this.cdr.detectChanges();
+    }
+  }
+
+  formatTime(value: number) {
+    const minutes = Math.floor(value);
+    const seconds = Math.floor((value - minutes) * 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+
+  public getThumbnailUrl(): string {
+    return `https://img.youtube.com/vi/${this.videoId}/0.jpg`;
+  }
 }

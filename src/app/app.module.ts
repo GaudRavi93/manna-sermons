@@ -23,6 +23,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AppLauncher } from '@ionic-native/app-launcher/ngx';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { AngularFireModule } from '@angular/fire';
+import { Push } from '@ionic-native/push/ngx';
+
 
 const firebaseConfig = {
   projectId: "manna-328020",
@@ -60,6 +62,7 @@ const firebaseConfig = {
     // Facebook,
     Deeplinks,
     SignInWithApple,
+    Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

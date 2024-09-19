@@ -42,6 +42,7 @@
     "@ionic-native/google-plus": "^5.36.0",
     "@ionic-native/in-app-browser": "^5.36.0",
     "@ionic-native/native-page-transitions": "^5.36.0",
+    "@ionic-native/push": "^5.36.0",
     "@ionic-native/social-sharing": "^5.36.0",
     "@ionic/angular": "^5.5.2",
     "angularx-social-login": "^4.0.1",
@@ -51,6 +52,7 @@
     "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-inappbrowser": "^4.1.0",
     "cordova-res": "^0.15.4",
+    "phonegap-plugin-push": "^2.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
