@@ -82,6 +82,14 @@ export class DataService {
     return this.http.get<ISermonResponse>(environment.API + `/sermons/${query}`);
   }
 
+  getSearchedData(text = ''): Observable<any> {
+    let query = ``;
+    if (text !== '') {
+      query += `&q[search]=${text}`;
+    }
+    return this.http.get<any>(environment.API + `/search/${query}`);
+  }
+
   public getRecentVideoByPastorId(id: number): Observable<ISermonResponse> {
     let query = `/sermons/?q[s]=created_at desc&per_page=1`;
     query += `&q[pastor_id_eq]=${id}`;

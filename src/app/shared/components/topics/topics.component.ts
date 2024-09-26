@@ -31,6 +31,8 @@ export class TopicsComponent implements OnInit {
   @Input() allowActive: boolean;
   @Input() noBackground: boolean;
   @Input() isHome: boolean;
+  @Input() isSearch: boolean;
+  @Input() topicCounts: any;
   @Output() setActive = new EventEmitter<number>();
 
   public slideOpts = {

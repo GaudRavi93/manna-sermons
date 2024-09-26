@@ -57,6 +57,10 @@ ion-row {
   text-align: left;
 }
 
+.church-cont {
+  padding-left: 0 !important;
+}
+
 .trash-cont {
   width: 38px;
   height: 38px;
@@ -65,4 +69,42 @@ ion-row {
   border: solid 1px var(--badge-border);
   background-color: #fff;
   border-radius: 50%;
+}
+
+.badge-div {
+  color: var(--reg-tab-color);
+  font-size: 13px;
+  margin: 0 6px 0 0;
+  padding: 1px 0px 0px 0px;
+  border-radius: 17.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  border: solid 1px var(--badge-border);
+  width: 75px;
+  height: 23px;
+  font-weight: bold;
+  background: var(--badge-border);
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.yellow-circle {
+  width: 42px;
+  height: 42px;
+  border: solid 2px var(--yellow);
+
+  .img-cont-person {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 1px var(--badge-border);
+    background-color: #fff;
+
+    & img {
+      width: 14px;
+      height: 14px;
+      margin: 11px;
+    }
+  }
 }

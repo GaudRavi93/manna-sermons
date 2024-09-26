@@ -27,14 +27,55 @@
 </ion-header>
 
 <ion-content center>
+
+  <div class="topics-div">
+    <app-topics
+      [topics]="topics"
+      [isShowAll]="true"
+      [active]="activeCategory"
+      [isSearch]="true"
+      [allowActive]="true"
+      (setActive)="displayData($event)"
+      [noBackground]="true"
+      [topicCounts]="topicCounts"
+      ></app-topics>
+  </div>
+
   <app-no-found *ngIf="isShowNoFound"></app-no-found>
 
-  <app-video-list
-    *ngIf="sermons"
-    [sermons]= "sermons"
-    (onClickVideo)="gotoSermonDetail($event)"
-    (onClickPreview)="gotoSermonDetail($event)"
-  ></app-video-list>
+  <div class="video-list-div">
+    <app-video-list
+      *ngIf="scriptures && scriptures.length && activeCategory == 'All' || activeCategory == 'Scriptures'"
+      [scriptures]= "scriptures"
+      (onClickVideo)="gotoScriptureDetail($event)"
+      (onClickPreview)="gotoScriptureDetail($event)"
+      [title]="activeCategory == 'All' ? 'Scriptures' : ''"
+    ></app-video-list>
+
+    <app-video-list
+      *ngIf="pastors && pastors.length && activeCategory == 'All' || activeCategory == 'Pastors'"
+      [pastors]= "pastors"
+      (onClickVideo)="gotoPasterDetail($event)"
+      (onClickPreview)="gotoPasterDetail($event)"
+      [title]="activeCategory == 'All' ? 'Pastors' : ''"
+    ></app-video-list>
+  
+    <app-video-list
+      *ngIf="churches && churches.length && activeCategory == 'All' || activeCategory == 'Churches'"
+      [churches]= "churches"
+      (onClickVideo)="gotoChurchDetail($event)"
+      (onClickPreview)="gotoChurchDetail($event)"
+      [title]="activeCategory == 'All' ? 'Churches' : ''"
+    ></app-video-list>
+
+    <app-video-list
+      *ngIf="sermons && sermons.length && activeCategory == 'All' || activeCategory == 'Sermons'"
+      [sermons]= "sermons"
+      (onClickVideo)="gotoSermonDetail($event)"
+      (onClickPreview)="gotoSermonDetail($event)"
+      [title]="activeCategory == 'All' ? 'Sermons' : ''"
+    ></app-video-list>
+  </div>
 
   <ion-infinite-scroll *ngIf="enableInfinite" threshold="100px" (ionInfinite)="fetchData($event, true)">
     <ion-infinite-scroll-content

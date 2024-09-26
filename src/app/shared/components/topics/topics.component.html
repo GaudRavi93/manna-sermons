@@ -8,7 +8,7 @@
     <div class="content strong-content" [ngClass]="'content-' + counter">
       <app-badge
         *ngIf="isShowAll"
-        text="All"
+        [text]="isSearch ? 'All (' + topicCounts.All + ')' : 'All'"
         [id]="-1"
         [isActive]="active === 'All'"
         (onClickBadge)="changeActive(-1)"
@@ -16,7 +16,7 @@
 
       <app-badge
         *ngFor="let t of topicList; let i = index"
-        [text]="t"
+        [text]="isSearch ? t + ' (' + topicCounts[t] + ')' : t"
         [id]="i"
         [isActive]="t === active"
         (onClickBadge)="changeActive(i)"

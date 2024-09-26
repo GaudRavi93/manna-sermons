@@ -1,3 +1,4 @@
+<div class="badge-div" *ngIf="title == 'Sermons'">{{ title }}</div>
 <ion-grid *ngIf="sermonList">
   <ion-row *ngFor="let s of sermonList">
     <ion-col (click)="isClickPreview(s.id)">
@@ -25,5 +26,62 @@
       </div>
 
     </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div class="badge-div" *ngIf="title == 'Pastors'">{{ title }}</div>
+<ion-grid *ngIf="pastorList">
+  <ion-row *ngFor="let p of pastorList">
+    <ion-col (click)="isClickPreview(p.id)">
+      <div class="flex-cont">
+        <div *ngIf="p.photo_url" class="img-cont">
+          <img [src]="p.photo_url" alt="img" (error)="handleImageError(p)">
+        </div>
+        <div *ngIf="!p.photo_url" class="yellow-circle">
+          <div class="img-cont-person">
+            <img src="assets/icon/person-y2.svg" alt="">
+          </div>
+        </div>
+        <div class="info-cont">
+          <h3>{{p.given_name}} {{p.family_name}}</h3>
+          <p>{{p.city}}, {{p.state}}</p>
+          <p>{{p.follower_info}} Followers
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div class="badge-div" *ngIf="title == 'Churches'">{{ title }}</div>
+<ion-grid *ngIf="churchList">
+  <ion-row *ngFor="let c of churchList">
+    <ion-col (click)="isClickPreview(c.id)">
+      <div class="flex-cont">
+        <div class="info-cont church-cont">
+          <h3>{{c.name}}</h3>
+          <p>{{c.city}}, {{c.state}}</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div class="badge-div" *ngIf="title == 'Scriptures'">{{ title }}</div>
+<ion-grid *ngIf="scriptureList">
+  <ion-row *ngFor="let s of scriptureList">
+    <!-- <ion-col (click)="isClickPreview(c.id)">
+      <div class="flex-cont">
+        <div class="info-cont">
+          <h3>{{c.name}}</h3>
+          <p>{{c.city}}, {{c.state}}</p>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="1" (click)="isClick(c.id)" pointer>
+      <ion-icon *ngIf="showArrow" name="chevron-forward-outline"></ion-icon>
+      <div *ngIf="showTrash" class="trash-cont">
+        <img src="../../../../assets/icon/delete.svg" alt="">
+      </div>
+    </ion-col> -->
   </ion-row>
 </ion-grid>

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ISermon } from '../../models/sermon';
 import { DataService } from '../../services/data.service';
+import { IPastor } from '../../models/pastor';
+import { IChurch } from '../../models/church';
 
 @Component({
   selector: 'app-video-list',
@@ -12,13 +14,26 @@ export class VideoListComponent implements OnInit {
     this.sermonList = val;
     this.getPastorsDetail();
   };
+  @Input() set pastors(val: IPastor[]) {
+    this.pastorList = val;
+  }
+  @Input() set churches(val: IChurch[]) {
+    this.churchList = val;
+  }
+  @Input() set scriptures(val: any[]) {
+    this.scriptureList = val;
+  }
   @Input() showArrow: boolean;
   @Input() showTrash: boolean;
+  @Input() title!: string;
   @Output() onClick = new EventEmitter<number>();
   @Output() onClickVideo = new EventEmitter<number>();
   @Output() onClickPreview = new EventEmitter<number>();
 
   public sermonList: ISermon[];
+  public pastorList: IPastor[];
+  public churchList: IChurch[];
+  public scriptureList: any[];
   public pastorMap = {};
 
   constructor(
@@ -52,4 +67,7 @@ export class VideoListComponent implements OnInit {
     });
   }
 
+  handleImageError(p){
+    p.photo_url = '';
+  }
 }

@@ -1,5 +1,4 @@
 ion-content {
-  --padding-start: 20px;
   --padding-end: 20px;
   color: var(--reg-tab-color);
 }
@@ -46,4 +45,13 @@ ion-input {
   font-size: 13px;
   --placeholder-color: var(--reg-color);
   --placeholder-opacity: 0.7;
+}
+
+.topics-div {
+  width: 100vw;
+  border-bottom: solid 1px var(--badge-border);
+}
+
+.video-list-div {
+  width: 100vw;
 }
