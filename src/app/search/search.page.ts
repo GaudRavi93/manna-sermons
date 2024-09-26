@@ -80,7 +80,7 @@ export class SearchPage implements OnInit {
 
     // this.router.navigate([], {
     //   queryParams: { txt: this.searchText },
-    // })
+    // });
 
     this.fetchData();
   }
