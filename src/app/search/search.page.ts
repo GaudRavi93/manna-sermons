@@ -103,11 +103,20 @@ export class SearchPage implements OnInit {
       // const data = res.sermons.results;
       // this.sermons = isLazy ? this.sermons.concat(data) : data;
       // this.enableInfinite = res.sermons.current_page < res.sermons.total_pages;
-      // this.isShowNoFound = this.sermons.length < 1;
+      this.isShowNoFound = this.sermons.length < 1 && this.pastors.length < 1 && this.churches.length < 1 && this.scriptures.length < 1;
       if (event) {
         event.target.complete();
       }
     });
+  }
+
+  clearSearch() {
+    this.searchText = '';
+    this.searchIsChange(this.searchText);
+  }
+
+  onInputKeyup(event: any) {
+    this.searchText = event.target.value;
   }
 
   public displayData(indx: number) {

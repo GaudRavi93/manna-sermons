@@ -18,9 +18,17 @@
         debounce="1000"
         [placeholder]="placeholder"
         (ionChange)="searchIsChange(searchText)"
+        (keyup)="onInputKeyup($event)"   
       >
         <ion-img src="assets/icon/search-p.svg"></ion-img>
       </ion-input>
+      <!-- <div *ngIf="searchText" class="clear-icon-container"> -->
+        <ion-icon *ngIf="searchText"
+          name="close"
+          class="clear-icon"
+          (click)="clearSearch()"
+        ></ion-icon>
+      <!-- </div> -->
     </div>
 
   </ion-toolbar>
