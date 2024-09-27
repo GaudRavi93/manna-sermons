@@ -12,6 +12,8 @@ import { IUser } from './shared/models/user';
 import { Location } from '@angular/common';
 import { Deeplinks } from '@ionic-native/deeplinks/ngx';
 import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +38,7 @@ export class AppComponent {
     private zone: NgZone,
     private navCtrl: NavController,
     private push: Push,
+    private http: HttpClient,
   ) {
     // this.pay.init();
     
@@ -115,8 +118,22 @@ export class AppComponent {
     pushObject.on('notification').subscribe((notification: any) => {
     });
 
+    let token: string;
     pushObject.on('registration').subscribe((registration: any) => {
-      console.log("token:",registration.registrationId);
+      token = registration.registrationId;
+      console.log("token:", token);
+    });
+
+    const data = {
+      token,
+      platform: this.pl.is('ios') ? 'ios' : 'android',
+      model: this.pl.is('ios') ? 'iPhone' : 'Android',
+    };
+      
+    this.http.post(environment.API + '/devices', data).subscribe(res => {
+      console.log('res:', res);
+    }, err => {
+      console.log('push subscribe err: ', err);
     });
 
     pushObject.on('error').subscribe(error => console.error(error));
