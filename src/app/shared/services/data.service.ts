@@ -83,11 +83,7 @@ export class DataService {
   }
 
   getSearchedData(text = ''): Observable<any> {
-    let query = ``;
-    if (text !== '') {
-      query += `&q[search]=${text}`;
-    }
-    return this.http.get<any>(environment.API + `/search/${query}`);
+    return this.http.get<any>(environment.API + `/search/${text}`);
   }
 
   public getRecentVideoByPastorId(id: number): Observable<ISermonResponse> {
